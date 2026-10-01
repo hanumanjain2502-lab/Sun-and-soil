@@ -1,0 +1,3380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#09150f">
+<meta name="description" content="Build your Kenya and Tanzania safari journey with Sun & Soil Destinations. Explore destinations, seasons and experiences, then create your personalised safari plan.">
+<title>Sun & Soil — Your Africa. Your Way.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --forest:#09150f;
+  --forest-2:#10251a;
+  --forest-3:#173325;
+  --gold:#c9a45d;
+  --gold-2:#e0c483;
+  --sand:#e9dfca;
+  --ivory:#f7f4ec;
+  --white:#fff;
+  --ink:#151815;
+  --muted:#6d746e;
+  --line:rgba(20,36,27,.10);
+  --glass:rgba(255,255,255,.72);
+  --shadow:0 25px 80px rgba(13,28,20,.12);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Manrope",Arial,sans-serif;
+  --radius:28px;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:#f2f0e9;
+  color:var(--ink);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer}
+
+img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+::selection{
+  background:var(--gold);
+  color:var(--forest);
+}
+
+/* PRELOADER */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:var(--forest);
+  display:grid;
+  place-items:center;
+  color:var(--ivory);
+  transition:opacity .8s ease,visibility .8s ease;
+}
+
+.preloader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.preloader-inner{
+  text-align:center;
+}
+
+.preloader-mark{
+  width:56px;
+  height:56px;
+  border:1px solid rgba(224,196,131,.45);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:auto auto 18px;
+  animation:pulse 1.6s infinite;
+}
+
+.preloader-mark span{
+  width:10px;
+  height:10px;
+  background:var(--gold);
+  border-radius:50%;
+}
+
+.preloader small{
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  font-size:10px;
+  color:#d9d2c4;
+}
+
+@keyframes pulse{
+  50%{
+    transform:scale(1.13);
+    box-shadow:0 0 0 12px rgba(201,164,93,.05);
+  }
+}
+
+/* PAGE */
+
+.page-shell{
+  width:min(1440px,calc(100% - 28px));
+  margin:14px auto 28px;
+  background:var(--ivory);
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+/* NAVIGATION */
+
+.nav{
+  height:78px;
+  padding:0 34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(247,244,236,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+
+.brand-symbol{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--forest);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(9,21,15,.2);
+}
+
+.brand-symbol:before{
+  content:"";
+  position:absolute;
+  width:42px;
+  height:13px;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  left:-2px;
+  top:11px;
+  transform:rotate(-13deg);
+}
+
+.brand-symbol:after{
+  content:"";
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--gold);
+  left:14px;
+  top:14px;
+}
+
+.brand-text strong{
+  display:block;
+  font-size:13px;
+  letter-spacing:.11em;
+}
+
+.brand-text span{
+  display:block;
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#7c817b;
+  margin-top:3px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  font-size:12px;
+  font-weight:700;
+  color:#303631;
+}
+
+.nav-links a{
+  position:relative;
+  padding:29px 0;
+}
+
+.nav-links a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:18px;
+  height:2px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:.25s;
+}
+
+.nav-links a:hover:after,
+.nav-links a.active:after{
+  transform:scaleX(1);
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:220px;
+  justify-content:flex-end;
+}
+
+.icon-btn,
+.menu-btn{
+  width:40px;
+  height:40px;
+  border:1px solid rgba(0,0,0,.08);
+  background:white;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--forest);
+}
+
+.menu-btn{
+  display:none;
+}
+
+.primary-btn{
+  border:0;
+  background:var(--forest);
+  color:white;
+  border-radius:999px;
+  padding:13px 20px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 10px 24px rgba(9,21,15,.16);
+  transition:.25s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+  background:#153323;
+}
+
+.secondary-btn{
+  border:1px solid rgba(9,21,15,.13);
+  background:rgba(255,255,255,.7);
+  color:var(--forest);
+  border-radius:999px;
+  padding:13px 20px;
+  font-size:11px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:.25s;
+}
+
+.secondary-btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+}
+
+/* HERO */
+
+.hero{
+  min-height:660px;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr .95fr;
+  padding:36px 34px 28px;
+  gap:22px;
+  overflow:hidden;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:520px;
+  height:520px;
+  left:-240px;
+  top:-140px;
+  background:radial-gradient(circle,rgba(203,189,225,.42),transparent 67%);
+  filter:blur(14px);
+}
+
+.hero-copy{
+  padding:90px 18px 40px 30px;
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:#8b6a31;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(58px,6.4vw,94px);
+  line-height:.84;
+  margin:0;
+  letter-spacing:-.045em;
+  font-weight:600;
+  color:#0d1b14;
+}
+
+.hero h1 em{
+  font-style:italic;
+  color:#876b38;
+}
+
+.hero-lead{
+  font-size:14px;
+  line-height:1.8;
+  color:#657067;
+  max-width:500px;
+  margin:26px 0;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.hero-promise{
+  display:flex;
+  gap:26px;
+  margin-top:46px;
+}
+
+.promise{
+  display:flex;
+  gap:10px;
+  max-width:150px;
+}
+
+.promise-icon{
+  width:34px;
+  height:34px;
+  flex:none;
+  border-radius:11px;
+  background:#edf2eb;
+  display:grid;
+  place-items:center;
+  color:var(--forest);
+  font-size:14px;
+}
+
+.promise strong{
+  font-size:11px;
+  display:block;
+  line-height:1.25;
+}
+
+.promise span{
+  font-size:9px;
+  color:#7a817b;
+  line-height:1.45;
+  display:block;
+  margin-top:4px;
+}
+
+/* HERO IMAGE */
+
+.hero-visual{
+  position:relative;
+  min-height:590px;
+  border-radius:34px;
+  overflow:hidden;
+  background:#111;
+}
+
+.hero-visual img{
+  transition:transform 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-visual:hover img{
+  transform:scale(1.035);
+}
+
+.hero-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,.04),
+    rgba(0,0,0,.05) 45%,
+    rgba(0,0,0,.52)
+  );
+}
+
+.hero-lion-note{
+  position:absolute;
+  left:25px;
+  top:25px;
+  z-index:2;
+  color:white;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:10px 13px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:rgba(0,0,0,.17);
+  backdrop-filter:blur(12px);
+}
+
+.hero-card{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  z-index:3;
+  width:min(355px,calc(100% - 40px));
+  padding:18px;
+  border-radius:22px;
+  background:rgba(250,248,241,.93);
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.hero-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hero-card .location{
+  font-size:10px;
+  color:#5e665f;
+}
+
+.hero-card .rating{
+  font-size:10px;
+  color:#9a772e;
+}
+
+.hero-card h3{
+  font-family:var(--serif);
+  font-size:26px;
+  margin:6px 0 4px;
+}
+
+.hero-card p{
+  font-size:10px;
+  color:#737a74;
+  margin:0 0 14px;
+}
+
+.hero-card-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hero-card-row span{
+  font-size:10px;
+  color:#777;
+}
+
+.round-plus{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:var(--forest);
+  color:white;
+  font-size:20px;
+}
+
+/* QUICK SEARCH */
+
+.quick-search{
+  margin:-1px 34px 0;
+  padding:14px;
+  border-radius:24px;
+  background:white;
+  box-shadow:0 16px 50px rgba(24,42,31,.09);
+  position:relative;
+  z-index:5;
+  display:grid;
+  grid-template-columns:1.25fr 1fr 1fr auto;
+  align-items:center;
+}
+
+.search-field{
+  padding:8px 20px;
+  border-right:1px solid #e9e8e1;
+}
+
+.search-field small{
+  display:block;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:#8b918c;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.search-field strong{
+  font-size:12px;
+}
+
+.search-field button{
+  border:0;
+  background:none;
+  padding:0;
+  color:var(--forest);
+  font-weight:700;
+}
+
+.search-submit{
+  padding:0 6px 0 14px;
+}
+
+/* GENERIC SECTION */
+
+.section{
+  padding:92px 34px;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:30px;
+}
+
+.section-kicker{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  color:#94763e;
+  font-weight:800;
+}
+
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(42px,5vw,66px);
+  line-height:.9;
+  margin:8px 0 0;
+  color:#0d1b14;
+  font-weight:600;
+  letter-spacing:-.035em;
+}
+
+.section-copy{
+  font-size:12px;
+  line-height:1.7;
+  color:#707870;
+  max-width:440px;
+}
+
+/* TWO CHOICES */
+
+.dual-choice{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.choice-card{
+  min-height:360px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  color:white;
+  isolation:isolate;
+  box-shadow:0 18px 50px rgba(13,29,20,.1);
+}
+
+.choice-card img{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  transition:transform .8s;
+}
+
+.choice-card:hover img{
+  transform:scale(1.05);
+}
+
+.choice-card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.7));
+}
+
+.choice-content{
+  position:absolute;
+  inset:auto 28px 28px;
+}
+
+.choice-content .tag{
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#e0c483;
+}
+
+.choice-content h3{
+  font-family:var(--serif);
+  font-size:46px;
+  margin:6px 0;
+}
+
+.choice-content p{
+  font-size:11px;
+  line-height:1.6;
+  color:rgba(255,255,255,.78);
+  max-width:390px;
+}
+
+.choice-link{
+  display:inline-flex;
+  margin-top:12px;
+  padding:11px 15px;
+  border-radius:999px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.25);
+  font-size:10px;
+  font-weight:800;
+  backdrop-filter:blur(10px);
+}
+
+/* EXPERT */
+
+.expert-section{
+  background:var(--forest);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.expert-section:before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  right:-200px;
+  top:-180px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,164,93,.18),transparent 68%);
+}
+
+.expert-grid{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:40px;
+  align-items:center;
+}
+
+.expert-copy .section-title{
+  color:var(--ivory);
+}
+
+.expert-copy p{
+  color:rgba(255,255,255,.62);
+  max-width:450px;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.expert-points{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:28px;
+}
+
+.expert-point{
+  border-top:1px solid rgba(255,255,255,.13);
+  padding-top:13px;
+}
+
+.expert-point strong{
+  font-size:11px;
+}
+
+.expert-point span{
+  display:block;
+  font-size:9px;
+  color:rgba(255,255,255,.52);
+  margin-top:5px;
+  line-height:1.5;
+}
+
+.expert-form{
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:28px;
+  padding:24px;
+  backdrop-filter:blur(18px);
+}
+
+.form-title{
+  font-family:var(--serif);
+  font-size:32px;
+  margin:0 0 4px;
+}
+
+.form-sub{
+  font-size:10px;
+  color:rgba(255,255,255,.55);
+  margin:0 0 20px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field{
+  margin-bottom:10px;
+}
+
+.field label{
+  display:block;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:rgba(255,255,255,.55);
+  margin:0 0 6px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);
+  color:white;
+  border-radius:13px;
+  padding:13px 12px;
+  outline:0;
+  font-size:11px;
+}
+
+.field select option{
+  color:#111;
+}
+
+.form-submit{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  background:var(--gold);
+  color:var(--forest);
+  font-weight:900;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.form-note{
+  font-size:8px;
+  color:rgba(255,255,255,.4);
+  line-height:1.5;
+  text-align:center;
+  margin:10px 0 0;
+}
+
+/* MONTH */
+
+.month-section{
+  background:#ede9df;
+}
+
+.months{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:6px;
+  margin:22px 0;
+}
+
+.month{
+  border:1px solid rgba(15,31,22,.08);
+  background:rgba(255,255,255,.65);
+  border-radius:12px;
+  padding:12px 5px;
+  text-align:center;
+  font-size:9px;
+  font-weight:800;
+  color:#5f685f;
+  transition:.25s;
+}
+
+.month:hover,
+.month.active{
+  background:var(--forest);
+  color:white;
+  transform:translateY(-3px);
+}
+
+.season-panel{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:0;
+  background:white;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 15px 45px rgba(20,32,24,.08);
+}
+
+.season-image{
+  min-height:330px;
+  position:relative;
+}
+
+.season-image:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.18));
+}
+
+.season-info{
+  padding:42px;
+}
+
+.season-info .big-month{
+  font-family:var(--serif);
+  font-size:70px;
+  line-height:.8;
+  color:#d9d3c5;
+}
+
+.season-info h3{
+  font-family:var(--serif);
+  font-size:42px;
+  margin:12px 0 8px;
+}
+
+.season-info p{
+  font-size:12px;
+  line-height:1.75;
+  color:#707870;
+}
+
+.season-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:20px 0;
+}
+
+.tag-pill{
+  font-size:9px;
+  font-weight:800;
+  padding:8px 10px;
+  background:#eef1eb;
+  border-radius:999px;
+  color:#405345;
+}
+
+/* DESTINATIONS */
+
+.destinations-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.destination-card{
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(15,31,22,.06);
+  transition:.3s;
+}
+
+.destination-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 20px 45px rgba(15,31,22,.12);
+}
+
+.destination-image{
+  height:220px;
+  position:relative;
+}
+
+.destination-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  padding:7px 9px;
+  border-radius:999px;
+  background:rgba(9,21,15,.7);
+  color:white;
+  font-size:8px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  backdrop-filter:blur(8px);
+}
+
+.destination-body{
+  padding:16px;
+}
+
+.destination-body small{
+  font-size:8px;
+  color:#8b6a31;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-weight:800;
+}
+
+.destination-body h3{
+  font-family:var(--serif);
+  font-size:28px;
+  margin:4px 0;
+}
+
+.destination-body p{
+  font-size:9px;
+  line-height:1.55;
+  color:#737a74;
+  min-height:42px;
+  margin:0;
+}
+
+.destination-link{
+  display:inline-flex;
+  margin-top:14px;
+  font-size:9px;
+  font-weight:900;
+  color:var(--forest);
+  align-items:center;
+  gap:6px;
+}
+
+/* JOURNEYS */
+
+.journeys{
+  background:var(--forest);
+}
+
+.journeys .section-title{
+  color:var(--ivory);
+}
+
+.journeys .section-copy{
+  color:rgba(255,255,255,.55);
+}
+
+.journey-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.journey-card{
+  background:#13271c;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:25px;
+  overflow:hidden;
+  color:white;
+}
+
+.journey-image{
+  height:210px;
+  position:relative;
+}
+
+.journey-image:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.58));
+}
+
+.journey-duration{
+  position:absolute;
+  z-index:2;
+  left:13px;
+  top:13px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  padding:7px 9px;
+  border-radius:999px;
+  font-size:8px;
+  backdrop-filter:blur(8px);
+}
+
+.journey-body{
+  padding:18px;
+}
+
+.journey-body .eyebrow{
+  margin:0 0 7px;
+}
+
+.journey-body h3{
+  font-family:var(--serif);
+  font-size:31px;
+  margin:0 0 6px;
+}
+
+.journey-body p{
+  font-size:9px;
+  line-height:1.6;
+  color:rgba(255,255,255,.52);
+  min-height:44px;
+}
+
+.journey-route{
+  font-size:9px;
+  color:#d7bd83;
+  line-height:1.5;
+  border-top:1px solid rgba(255,255,255,.09);
+  padding-top:12px;
+}
+
+.journey-btn{
+  display:inline-flex;
+  margin-top:15px;
+  font-size:9px;
+  font-weight:900;
+  color:white;
+  gap:7px;
+}
+
+/* EXPERIENCES */
+
+.experience-grid{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:16px;
+}
+
+.experience-main{
+  min-height:470px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  color:white;
+}
+
+.experience-main img{
+  position:absolute;
+  inset:0;
+}
+
+.experience-main:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.72));
+}
+
+.experience-main-content{
+  position:absolute;
+  z-index:2;
+  left:28px;
+  right:28px;
+  bottom:28px;
+}
+
+.experience-main-content h3{
+  font-family:var(--serif);
+  font-size:56px;
+  margin:5px 0;
+}
+
+.experience-main-content p{
+  font-size:11px;
+  color:rgba(255,255,255,.72);
+  max-width:500px;
+  line-height:1.7;
+}
+
+.experience-stack{
+  display:grid;
+  gap:16px;
+}
+
+.exp-mini{
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+  min-height:227px;
+  color:white;
+}
+
+.exp-mini img{
+  position:absolute;
+  inset:0;
+}
+
+.exp-mini:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));
+}
+
+.exp-mini-content{
+  position:absolute;
+  z-index:2;
+  left:20px;
+  right:20px;
+  bottom:18px;
+}
+
+.exp-mini h4{
+  font-family:var(--serif);
+  font-size:31px;
+  margin:0;
+}
+
+.exp-mini p{
+  font-size:8px;
+  color:rgba(255,255,255,.68);
+  margin:3px 0 0;
+}
+
+/* MIGRATION */
+
+.migration{
+  min-height:560px;
+  position:relative;
+  border-radius:32px;
+  overflow:hidden;
+  color:white;
+  background:#101713;
+}
+
+.migration-bg{
+  position:absolute;
+  inset:0;
+  background:url("https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1800&q=85") center/cover;
+}
+
+.migration:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(5,12,8,.92) 0%,
+    rgba(5,12,8,.62) 45%,
+    rgba(5,12,8,.1) 100%
+  );
+}
+
+.migration-content{
+  position:absolute;
+  z-index:2;
+  left:44px;
+  top:48px;
+  width:min(530px,75%);
+}
+
+.migration-content .section-title{
+  color:white;
+}
+
+.migration-content p{
+  font-size:12px;
+  line-height:1.8;
+  color:rgba(255,255,255,.68);
+}
+
+.migration-line{
+  display:flex;
+  align-items:center;
+  gap:0;
+  margin-top:30px;
+  position:relative;
+}
+
+.mig-step{
+  flex:1;
+  position:relative;
+}
+
+.mig-step:not(:last-child):after{
+  content:"";
+  height:1px;
+  background:rgba(224,196,131,.35);
+  position:absolute;
+  top:8px;
+  left:18px;
+  right:0;
+}
+
+.mig-dot{
+  width:17px;
+  height:17px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  background:var(--forest);
+  position:relative;
+  z-index:2;
+}
+
+.mig-step strong{
+  display:block;
+  font-size:9px;
+  margin-top:9px;
+}
+
+.mig-step span{
+  display:block;
+  font-size:8px;
+  color:rgba(255,255,255,.45);
+  margin-top:3px;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:white;
+  border-radius:25px;
+  box-shadow:0 10px 35px rgba(15,31,22,.07);
+  overflow:hidden;
+}
+
+.stat{
+  padding:24px;
+  border-right:1px solid #eceae2;
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat strong{
+  font-family:var(--serif);
+  font-size:38px;
+}
+
+.stat span{
+  display:block;
+  font-size:9px;
+  color:#777f79;
+  margin-top:3px;
+}
+
+/* FINAL CTA */
+
+.final-cta{
+  margin:0 34px 34px;
+  border-radius:30px;
+  background:linear-gradient(120deg,#173325,#0a1710);
+  color:white;
+  padding:52px 50px;
+  position:relative;
+  overflow:hidden;
+}
+
+.final-cta:before{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  right:-100px;
+  top:-160px;
+  background:radial-gradient(circle,rgba(201,164,93,.23),transparent 68%);
+}
+
+.final-cta-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.final-cta h2{
+  font-family:var(--serif);
+  font-size:50px;
+  line-height:.9;
+  margin:8px 0;
+}
+
+.final-cta p{
+  font-size:11px;
+  color:rgba(255,255,255,.58);
+  max-width:520px;
+  line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+  padding:38px 34px;
+  background:#07100b;
+  color:white;
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr 1fr;
+  gap:30px;
+}
+
+.footer .brand-text strong{
+  color:white;
+}
+
+.footer .brand-text span{
+  color:#8b958d;
+}
+
+.footer p{
+  font-size:9px;
+  color:rgba(255,255,255,.45);
+  line-height:1.7;
+  max-width:300px;
+}
+
+.footer h4{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:#d7bd83;
+  margin:0 0 13px;
+}
+
+.footer a,
+.footer div{
+  display:block;
+  font-size:9px;
+  color:rgba(255,255,255,.56);
+  margin:8px 0;
+}
+
+.footer-bottom{
+  grid-column:1/-1;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:18px;
+  display:flex;
+  justify-content:space-between;
+  font-size:8px;
+  color:rgba(255,255,255,.35);
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translate(-50%,20px);
+  z-index:500;
+  background:var(--forest);
+  color:white;
+  padding:12px 17px;
+  border-radius:999px;
+  font-size:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  box-shadow:0 12px 35px rgba(0,0,0,.2);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* TABLET */
+
+@media(max-width:1050px){
+
+  .nav-links{
+    gap:18px;
+  }
+
+  .brand,
+  .nav-actions{
+    min-width:160px;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .hero-copy{
+    padding:55px 25px 10px;
+  }
+
+  .hero-visual{
+    min-height:520px;
+  }
+
+  .destinations-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .months{
+    grid-template-columns:repeat(6,1fr);
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:760px){
+
+  body{
+    background:var(--ivory);
+  }
+
+  .page-shell{
+    width:100%;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .nav{
+    height:68px;
+    padding:0 17px;
+  }
+
+  .nav-links,
+  .nav-actions .icon-btn{
+    display:none;
+  }
+
+  .menu-btn{
+    display:grid;
+  }
+
+  .brand{
+    min-width:auto;
+  }
+
+  .nav-actions{
+    min-width:auto;
+  }
+
+  .nav-actions .primary-btn{
+    display:none;
+  }
+
+  .hero{
+    padding:12px 14px 20px;
+    min-height:auto;
+    gap:14px;
+  }
+
+  .hero-copy{
+    padding:42px 12px 5px;
+  }
+
+  .hero h1{
+    font-size:58px;
+  }
+
+  .hero-lead{
+    font-size:12px;
+    margin:20px 0;
+  }
+
+  .hero-promise{
+    gap:12px;
+    margin-top:30px;
+  }
+
+  .promise{
+    max-width:none;
+    flex:1;
+  }
+
+  .promise:nth-child(3){
+    display:none;
+  }
+
+  .hero-visual{
+    min-height:450px;
+    border-radius:25px;
+  }
+
+  .hero-card{
+    right:12px;
+    bottom:12px;
+    width:calc(100% - 24px);
+  }
+
+  .quick-search{
+    margin:0 14px;
+    padding:8px;
+    grid-template-columns:1fr 1fr;
+    gap:4px;
+    border-radius:19px;
+  }
+
+  .search-field{
+    padding:11px 10px;
+    border-right:0;
+    border-bottom:1px solid #eee;
+  }
+
+  .search-submit{
+    grid-column:1/-1;
+    padding:5px;
+  }
+
+  .search-submit .primary-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  .section{
+    padding:62px 18px;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-copy{
+    margin-top:15px;
+  }
+
+  .dual-choice,
+  .expert-grid,
+  .season-panel,
+  .experience-grid{
+    grid-template-columns:1fr;
+  }
+
+  .choice-card{
+    min-height:300px;
+  }
+
+  .expert-section{
+    padding-top:65px;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .months{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .season-image{
+    min-height:260px;
+  }
+
+  .season-info{
+    padding:27px;
+  }
+
+  .season-info .big-month{
+    font-size:52px;
+  }
+
+  .destinations-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .destination-image{
+    height:170px;
+  }
+
+  .journey-grid{
+    grid-template-columns:1fr;
+  }
+
+  .experience-main{
+    min-height:390px;
+  }
+
+  .experience-main-content h3{
+    font-size:48px;
+  }
+
+  .migration{
+    min-height:600px;
+  }
+
+  .migration-content{
+    left:22px;
+    top:28px;
+    width:calc(100% - 44px);
+  }
+
+  .migration-line{
+    display:block;
+    margin-top:25px;
+  }
+
+  .mig-step{
+    padding-bottom:17px;
+    padding-left:25px;
+  }
+
+  .mig-step:not(:last-child):after{
+    left:8px;
+    top:17px;
+    bottom:-8px;
+    width:1px;
+    height:auto;
+    right:auto;
+  }
+
+  .mig-dot{
+    position:absolute;
+    left:0;
+    top:0;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .stat{
+    padding:19px;
+  }
+
+  .stat:nth-child(2){
+    border-right:0;
+  }
+
+  .stat:nth-child(-n+2){
+    border-bottom:1px solid #eceae2;
+  }
+
+  .final-cta{
+    margin:0 18px 18px;
+    padding:36px 25px;
+  }
+
+  .final-cta-inner{
+    display:block;
+  }
+
+  .final-cta h2{
+    font-size:44px;
+  }
+
+  .final-cta .primary-btn{
+    margin-top:18px;
+  }
+
+  .footer{
+    padding:35px 20px;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-bottom{
+    display:block;
+    line-height:1.7;
+  }
+
+  .footer-bottom span{
+    display:block;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:430px){
+
+  .hero h1{
+    font-size:51px;
+  }
+
+  .hero-promise{
+    display:none;
+  }
+
+  .destinations-grid{
+    grid-template-columns:1fr;
+  }
+
+  .destination-image{
+    height:220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-mark">
+      <span></span>
+    </div>
+    <small>Crafting Soulful Journeys</small>
+  </div>
+</div>
+
+<div class="page-shell">
+
+<header class="nav">
+
+  <a class="brand" href="index.html" aria-label="Sun and Soil home">
+    <div class="brand-symbol"></div>
+
+    <div class="brand-text">
+      <strong>SUN &amp; SOIL</strong>
+      <span>Destinations</span>
+    </div>
+  </a>
+
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="index.html" class="active">Home</a>
+    <a href="explore.html">Destinations</a>
+    <a href="explore.html#experiences">Experiences</a>
+    <a href="#about">About Us</a>
+  </nav>
+
+  <div class="nav-actions">
+
+    <a class="primary-btn" href="planner.html">
+      Build My Safari <span>→</span>
+    </a>
+
+    <button
+      class="icon-btn"
+      onclick="document.getElementById('expert').scrollIntoView({behavior:'smooth'})"
+      aria-label="Talk to expert">
+      ◌
+    </button>
+
+    <button
+      class="menu-btn"
+      onclick="toast('Navigation is available through the sections below.')"
+      aria-label="Menu">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-copy">
+
+    <div class="eyebrow">
+      Explore. Discover. Experience Africa.
+    </div>
+
+    <h1>
+      Your Africa.<br>
+      <em>Your way.</em>
+    </h1>
+
+    <p class="hero-lead">
+      Kenya × Tanzania safari journeys designed around your season,
+      your interests and the way you want to experience the wild.
+    </p>
+
+    <div class="hero-actions">
+
+      <a class="primary-btn" href="planner.html">
+        Build My Safari <span>→</span>
+      </a>
+
+      <a class="secondary-btn" href="#expert">
+        Talk to an Expert <span>↗</span>
+      </a>
+
+    </div>
+
+    <div class="hero-promise">
+
+      <div class="promise">
+        <div class="promise-icon">✦</div>
+
+        <div>
+          <strong>Season-led</strong>
+          <span>Know what Africa offers when you travel.</span>
+        </div>
+      </div>
+
+      <div class="promise">
+        <div class="promise-icon">⌁</div>
+
+        <div>
+          <strong>Made around you</strong>
+          <span>Choose places, pace and experiences.</span>
+        </div>
+      </div>
+
+      <div class="promise">
+        <div class="promise-icon">↗</div>
+
+        <div>
+          <strong>Expert support</strong>
+          <span>A real Sun &amp; Soil specialist is one call away.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-visual">
+
+    <img
+      src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1500&q=88"
+      alt="African wildlife safari landscape">
+
+    <div class="hero-lion-note">
+      Kenya × Tanzania · Safari
+    </div>
+
+    <div class="hero-card">
+
+      <div class="hero-card-top">
+
+        <span class="location">
+          ● Serengeti · Tanzania
+        </span>
+
+        <span class="rating">
+          ✦ Wildlife
+        </span>
+
+      </div>
+
+      <h3>The endless plains.</h3>
+
+      <p>
+        Migration, predators, big skies and the freedom
+        to build your own route.
+      </p>
+
+      <div class="hero-card-row">
+
+        <span>Discover the journey</span>
+
+        <button
+          class="round-plus"
+          onclick="location.href='planner.html'">
+          +
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- QUICK SEARCH -->
+
+<section class="quick-search reveal">
+
+  <div class="search-field">
+
+    <small>Where are you going?</small>
+
+    <strong id="quickCountry">
+      Kenya + Tanzania
+    </strong>
+
+  </div>
+
+  <div class="search-field">
+
+    <small>When?</small>
+
+    <button id="quickMonth" onclick="cycleMonth()">
+      Choose a month
+    </button>
+
+  </div>
+
+  <div class="search-field">
+
+    <small>Travellers</small>
+
+    <strong id="quickGuests">
+      2 Adults
+    </strong>
+
+  </div>
+
+  <div class="search-submit">
+
+    <a class="primary-btn" href="planner.html">
+      Start Exploring →
+    </a>
+
+  </div>
+
+</section>
+
+<!-- TWO PATHS -->
+
+<section class="section reveal" id="explore">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        Two ways to begin
+      </div>
+
+      <h2 class="section-title">
+        Choose your<br>
+        kind of journey.
+      </h2>
+
+    </div>
+
+    <p class="section-copy">
+      Whether you need a quick expert recommendation or want
+      to build every part of the route yourself, Sun &amp; Soil lets
+      you start at the level that suits you.
+    </p>
+
+  </div>
+
+  <div class="dual-choice">
+
+    <a class="choice-card" href="#expert">
+
+      <img
+        src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=85"
+        alt="Safari vehicle in Africa">
+
+      <div class="choice-content">
+
+        <div class="tag">
+          In a hurry?
+        </div>
+
+        <h3>
+          Talk to an Expert
+        </h3>
+
+        <p>
+          Tell us your destination, month and group size.
+          A Kenya × Tanzania specialist can take it from there.
+        </p>
+
+        <span class="choice-link">
+          Quick enquiry →
+        </span>
+
+      </div>
+
+    </a>
+
+    <a class="choice-card" href="planner.html">
+
+      <img
+        src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+        alt="African safari landscape">
+
+      <div class="choice-content">
+
+        <div class="tag">
+          Want to explore?
+        </div>
+
+        <h3>
+          Build Your Own Safari
+        </h3>
+
+        <p>
+          Choose where to start, discover the right month,
+          add experiences and watch your journey take shape.
+        </p>
+
+        <span class="choice-link">
+          Start building →
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+<!-- QUICK EXPERT -->
+
+<section class="section expert-section reveal" id="expert">
+
+  <div class="expert-grid">
+
+    <div class="expert-copy">
+
+      <div class="section-kicker">
+        The fast way
+      </div>
+
+      <h2 class="section-title">
+        One conversation.<br>
+        One beautiful journey.
+      </h2>
+
+      <p>
+        Short on time? Give us the essentials and our Africa
+        specialist can help shape the right direction for you.
+        No long questionnaire. No public rates. Just a useful
+        starting point.
+      </p>
+
+      <div class="expert-points">
+
+        <div class="expert-point">
+          <strong>01 · Where</strong>
+          <span>Kenya, Tanzania or both.</span>
+        </div>
+
+        <div class="expert-point">
+          <strong>02 · When</strong>
+          <span>Your month or preferred date.</span>
+        </div>
+
+        <div class="expert-point">
+          <strong>03 · Who</strong>
+          <span>Adults and children travelling.</span>
+        </div>
+
+        <div class="expert-point">
+          <strong>04 · Connect</strong>
+          <span>Mobile + email so we can reach you.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <form class="expert-form" id="quickExpertForm">
+
+      <h3 class="form-title">
+        Talk to a Safari Expert
+      </h3>
+
+      <p class="form-sub">
+        A 60-second enquiry is all you need to get started.
+      </p>
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <label>
+            Destination
+          </label>
+
+          <select id="expertCountry">
+
+            <option>Kenya</option>
+            <option>Tanzania</option>
+            <option>Kenya + Tanzania</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Travel month
+          </label>
+
+          <select id="expertMonth">
+
+            <option value="">
+              Choose month
+            </option>
+
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <label>
+            Adults
+          </label>
+
+          <input
+            id="expertAdults"
+            type="number"
+            min="1"
+            value="2">
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Children
+          </label>
+
+          <input
+            id="expertChildren"
+            type="number"
+            min="0"
+            value="0">
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Mobile *
+        </label>
+
+        <input
+          id="expertMobile"
+          type="tel"
+          required
+          placeholder="+91">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Email *
+        </label>
+
+        <input
+          id="expertEmail"
+          type="email"
+          required
+          placeholder="you@example.com">
+
+      </div>
+
+      <button
+        class="form-submit"
+        type="submit">
+
+        TALK TO A SUN &amp; SOIL EXPERT →
+
+      </button>
+
+      <p class="form-note">
+        Want to customise everything yourself?
+        <a
+          href="planner.html"
+          style="color:#e0c483">
+          Build your own safari →
+        </a>
+      </p>
+
+    </form>
+
+  </div>
+
+</section>
+
+<!-- SEASONS -->
+
+<section class="section month-section reveal" id="seasons">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        Africa, all year
+      </div>
+
+      <h2 class="section-title">
+        Every month has<br>
+        a story to tell.
+      </h2>
+
+    </div>
+
+    <p class="section-copy">
+      There isn't one universal “best month”.
+      Different periods bring different landscapes,
+      wildlife moments and ways to experience Kenya
+      and Tanzania.
+    </p>
+
+  </div>
+
+  <div class="months" id="months">
+
+    <button class="month" data-month="January">JAN</button>
+    <button class="month" data-month="February">FEB</button>
+    <button class="month" data-month="March">MAR</button>
+    <button class="month" data-month="April">APR</button>
+    <button class="month" data-month="May">MAY</button>
+    <button class="month" data-month="June">JUN</button>
+    <button class="month" data-month="July">JUL</button>
+    <button class="month" data-month="August">AUG</button>
+    <button class="month" data-month="September">SEP</button>
+    <button class="month" data-month="October">OCT</button>
+    <button class="month" data-month="November">NOV</button>
+    <button class="month" data-month="December">DEC</button>
+
+  </div>
+
+  <div class="season-panel" id="seasonPanel">
+
+    <div class="season-image">
+
+      <img
+        id="seasonImage"
+        src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=85"
+        alt="African safari">
+
+    </div>
+
+    <div class="season-info">
+
+      <div class="big-month" id="seasonMonth">
+        JAN
+      </div>
+
+      <h3 id="seasonTitle">
+        Calving Season
+      </h3>
+
+      <p id="seasonText">
+        Southern Serengeti and Ndutu can become a powerful
+        wildlife focus, with calving and predator activity
+        forming the heart of the experience.
+      </p>
+
+      <div class="season-tags" id="seasonTags">
+
+        <span class="tag-pill">
+          Wildlife
+        </span>
+
+        <span class="tag-pill">
+          Photography
+        </span>
+
+        <span class="tag-pill">
+          Predators
+        </span>
+
+      </div>
+
+      <a class="primary-btn" href="planner.html">
+        Explore this month →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- DESTINATIONS -->
+
+<section class="section reveal" id="destinations">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        Start somewhere
+      </div>
+
+      <h2 class="section-title">
+        Places that become<br>
+        part of your story.
+      </h2>
+
+    </div>
+
+    <a class="secondary-btn" href="explore.html">
+      Explore all destinations →
+    </a>
+
+  </div>
+
+  <div class="destinations-grid">
+
+    <article class="destination-card">
+
+      <div class="destination-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85"
+          alt="Maasai Mara">
+
+        <span class="destination-badge">
+          Kenya
+        </span>
+
+      </div>
+
+      <div class="destination-body">
+
+        <small>
+          Migration · Wildlife
+        </small>
+
+        <h3>
+          Maasai Mara
+        </h3>
+
+        <p>
+          Open grasslands, exceptional wildlife viewing
+          and the iconic migration window.
+        </p>
+
+        <a class="destination-link" href="explore.html">
+          Discover Mara →
+        </a>
+
+      </div>
+
+    </article>
+
+    <article class="destination-card">
+
+      <div class="destination-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=900&q=85"
+          alt="Serengeti">
+
+        <span class="destination-badge">
+          Tanzania
+        </span>
+
+      </div>
+
+      <div class="destination-body">
+
+        <small>
+          Migration · Big Five
+        </small>
+
+        <h3>
+          Serengeti
+        </h3>
+
+        <p>
+          Endless plains, predators, migration and one
+          of Africa's great wildlife stages.
+        </p>
+
+        <a class="destination-link" href="explore.html">
+          Discover Serengeti →
+        </a>
+
+      </div>
+
+    </article>
+
+    <article class="destination-card">
+
+      <div class="destination-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85"
+          alt="Ngorongoro">
+
+        <span class="destination-badge">
+          Tanzania
+        </span>
+
+      </div>
+
+      <div class="destination-body">
+
+        <small>
+          Crater · Wildlife
+        </small>
+
+        <h3>
+          Ngorongoro
+        </h3>
+
+        <p>
+          A dramatic crater landscape with forest,
+          lake and open savannah habitats.
+        </p>
+
+        <a class="destination-link" href="explore.html">
+          Discover Ngorongoro →
+        </a>
+
+      </div>
+
+    </article>
+
+    <article class="destination-card">
+
+      <div class="destination-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1523480717984-24cba35ae1ef?auto=format&fit=crop&w=900&q=85"
+          alt="Zanzibar">
+
+        <span class="destination-badge">
+          Extension
+        </span>
+
+      </div>
+
+      <div class="destination-body">
+
+        <small>
+          Beach · Indian Ocean
+        </small>
+
+        <h3>
+          Zanzibar
+        </h3>
+
+        <p>
+          End your safari beside the Indian Ocean
+          with a slower island chapter.
+        </p>
+
+        <a class="destination-link" href="explore.html">
+          Discover Zanzibar →
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- CURATED JOURNEYS -->
+
+<section class="section journeys reveal">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        Curated starting points
+      </div>
+
+      <h2 class="section-title">
+        Journeys worth<br>
+        starting with.
+      </h2>
+
+    </div>
+
+    <p class="section-copy">
+      These are inspiration, not rigid packages.
+      Choose one as your starting point, then
+      customise it in the planner.
+    </p>
+
+  </div>
+
+  <div class="journey-grid">
+
+    <article class="journey-card">
+
+      <div class="journey-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=85"
+          alt="Classic Tanzania Safari">
+
+        <span class="journey-duration">
+          6 DAYS · 5 NIGHTS
+        </span>
+
+      </div>
+
+      <div class="journey-body">
+
+        <div class="eyebrow">
+          Tanzania · Classic Wildlife
+        </div>
+
+        <h3>
+          Classic Tanzania
+        </h3>
+
+        <p>
+          A compact Northern Circuit starting point
+          for first-time safari travellers.
+        </p>
+
+        <div class="journey-route">
+          Arusha → Manyara → Serengeti → Ngorongoro → Tarangire
+        </div>
+
+        <a class="journey-btn" href="planner.html">
+          Build from this →
+        </a>
+
+      </div>
+
+    </article>
+
+    <article class="journey-card">
+
+      <div class="journey-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=85"
+          alt="Great Migration">
+
+        <span class="journey-duration">
+          6–8 DAYS
+        </span>
+
+      </div>
+
+      <div class="journey-body">
+
+        <div class="eyebrow">
+          Kenya × Tanzania · Migration
+        </div>
+
+        <h3>
+          Great Migration
+        </h3>
+
+        <p>
+          Build around the seasonal movement through
+          the Serengeti–Mara ecosystem.
+        </p>
+
+        <div class="journey-route">
+          Serengeti → Northern Serengeti → Maasai Mara
+        </div>
+
+        <a class="journey-btn" href="planner.html">
+          Build from this →
+        </a>
+
+      </div>
+
+    </article>
+
+    <article class="journey-card">
+
+      <div class="journey-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=85"
+          alt="Kenya Explorer">
+
+        <span class="journey-duration">
+          8 DAYS · 7 NIGHTS
+        </span>
+
+      </div>
+
+      <div class="journey-body">
+
+        <div class="eyebrow">
+          Kenya · Explorer
+        </div>
+
+        <h3>
+          Kenya Explorer
+        </h3>
+
+        <p>
+          A broader Kenya circuit connecting classic
+          wildlife regions and northern wilderness.
+        </p>
+
+        <div class="journey-route">
+          Nairobi → Mara → Nakuru → Aberdare → Samburu
+        </div>
+
+        <a class="journey-btn" href="planner.html">
+          Build from this →
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- EXPERIENCES -->
+
+<section class="section reveal" id="experiences">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        Choose the feeling
+      </div>
+
+      <h2 class="section-title">
+        What do you want<br>
+        to experience?
+      </h2>
+
+    </div>
+
+    <p class="section-copy">
+      Your safari doesn't need to look like anybody else's.
+      Pick the moments that matter to you and let the route follow.
+    </p>
+
+  </div>
+
+  <div class="experience-grid">
+
+    <article class="experience-main">
+
+      <img
+        src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1300&q=85"
+        alt="Great migration and wildlife">
+
+      <div class="experience-main-content">
+
+        <div class="eyebrow">
+          Signature experience
+        </div>
+
+        <h3>
+          Great Migration
+        </h3>
+
+        <p>
+          A seasonal wildlife journey across the Serengeti–Mara
+          ecosystem. Your exact route should follow the time of year
+          and your interests.
+        </p>
+
+        <a class="secondary-btn" href="planner.html">
+          Build around Migration →
+        </a>
+
+      </div>
+
+    </article>
+
+    <div class="experience-stack">
+
+      <article class="exp-mini">
+
+        <img
+          src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=900&q=85"
+          alt="Elephant safari">
+
+        <div class="exp-mini-content">
+
+          <h4>
+            Big Five
+          </h4>
+
+          <p>
+            Lion · Elephant · Leopard · Buffalo · Rhino
+          </p>
+
+        </div>
+
+      </article>
+
+      <article class="exp-mini">
+
+        <img
+          src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=900&q=85"
+          alt="Safari balloon and landscape">
+
+        <div class="exp-mini-content">
+
+          <h4>
+            Balloon Safari
+          </h4>
+
+          <p>
+            See the Serengeti from a different perspective.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MIGRATION -->
+
+<section class="section reveal">
+
+  <div class="migration">
+
+    <div class="migration-bg"></div>
+
+    <div class="migration-content">
+
+      <div class="section-kicker">
+        Follow the season
+      </div>
+
+      <h2 class="section-title">
+        The Great Migration<br>
+        doesn't follow a calendar.
+      </h2>
+
+      <p>
+        It moves. Your safari should respond to the season,
+        location and experience you want. Use the planner
+        to choose your month and build a route around it.
+      </p>
+
+      <div class="migration-line">
+
+        <div class="mig-step">
+          <div class="mig-dot"></div>
+          <strong>Jan–Mar</strong>
+          <span>Southern focus</span>
+        </div>
+
+        <div class="mig-step">
+          <div class="mig-dot"></div>
+          <strong>Apr–May</strong>
+          <span>Green season</span>
+        </div>
+
+        <div class="mig-step">
+          <div class="mig-dot"></div>
+          <strong>Jun–Oct</strong>
+          <span>Migration focus</span>
+        </div>
+
+        <div class="mig-step">
+          <div class="mig-dot"></div>
+          <strong>Nov–Dec</strong>
+          <span>Green &amp; festive</span>
+        </div>
+
+      </div>
+
+      <a
+        class="primary-btn"
+        style="margin-top:28px"
+        href="planner.html">
+        Plan around your month →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="section reveal" id="about">
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong>2</strong>
+      <span>Countries to explore</span>
+    </div>
+
+    <div class="stat">
+      <strong>12</strong>
+      <span>Months of possibilities</span>
+    </div>
+
+    <div class="stat">
+      <strong>∞</strong>
+      <span>Ways to shape your route</span>
+    </div>
+
+    <div class="stat">
+      <strong>1:1</strong>
+      <span>Expert support when needed</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FINAL CTA -->
+
+<section class="final-cta">
+
+  <div class="final-cta-inner">
+
+    <div>
+
+      <div class="section-kicker">
+        Your journey starts here
+      </div>
+
+      <h2>
+        Don't just book Africa.<br>
+        Build yours.
+      </h2>
+
+      <p>
+        Explore Kenya and Tanzania, discover what each season
+        can offer, then create a safari around the places and
+        experiences you actually want.
+      </p>
+
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+      <a class="primary-btn" href="planner.html">
+        Build My Safari →
+      </a>
+
+      <a
+        class="secondary-btn"
+        style="background:rgba(255,255,255,.08);color:white;border-color:rgba(255,255,255,.2)"
+        href="#expert">
+        Talk to an Expert
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div>
+
+    <a class="brand" href="index.html">
+
+      <div class="brand-symbol"></div>
+
+      <div class="brand-text">
+        <strong>SUN &amp; SOIL</strong>
+        <span>Destinations</span>
+      </div>
+
+    </a>
+
+    <p>
+      Crafting Soulful Journeys. Kenya × Tanzania safari
+      experiences shaped around the traveller, the season
+      and the story.
+    </p>
+
+  </div>
+
+  <div>
+
+    <h4>
+      Explore
+    </h4>
+
+    <a href="explore.html">
+      Destinations
+    </a>
+
+    <a href="explore.html#experiences">
+      Experiences
+    </a>
+
+    <a href="#seasons">
+      Seasons
+    </a>
+
+    <a href="planner.html">
+      Build My Safari
+    </a>
+
+  </div>
+
+  <div>
+
+    <h4>
+      Talk to us
+    </h4>
+
+    <a href="tel:+919637146111">
+      India · +91 9637146111
+    </a>
+
+    <a href="tel:+255657313330">
+      Tanzania · +255 657 313 330
+    </a>
+
+    <a href="mailto:info@sunandsoildestinations.com">
+      info@sunandsoildestinations.com
+    </a>
+
+  </div>
+
+  <div>
+
+    <h4>
+      Sun &amp; Soil
+    </h4>
+
+    <div>Kenya</div>
+    <div>Tanzania</div>
+    <div>East Africa</div>
+    <div>Crafting Soulful Journeys</div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <span>
+      © <span id="year"></span>
+      Sun &amp; Soil Destinations Pvt. Ltd.
+    </span>
+
+    <span>
+      Explore responsibly · Travel meaningfully
+    </span>
+
+  </div>
+
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const seasonData = {
+
+  January:{
+    label:"Calving Season",
+    text:"Southern Serengeti and Ndutu can become a powerful wildlife focus, with calving and predator activity forming the heart of the experience.",
+    tags:["Wildlife","Calving","Predators"],
+    image:"https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  February:{
+    label:"Calving Season",
+    text:"February continues the southern Serengeti calving focus, with young wildlife, predator activity and strong photography opportunities.",
+    tags:["Calving","Wildlife","Photography"],
+    image:"https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  March:{
+    label:"Calving & Wildlife",
+    text:"March can work well for wildlife-focused journeys while seasonal conditions begin to transition.",
+    tags:["Wildlife","Landscape","Flexible"],
+    image:"https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  April:{
+    label:"Green Season",
+    text:"Green landscapes, dramatic skies and a quieter-feeling safari rhythm can make April a compelling time for a different side of Tanzania.",
+    tags:["Green Landscapes","Wildlife","Photography"],
+    image:"https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  May:{
+    label:"Green Season",
+    text:"May continues the green-season story, with landscapes taking centre stage alongside wildlife viewing.",
+    tags:["Green","Landscape","Wildlife"],
+    image:"https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  June:{
+    label:"Migration Transition",
+    text:"June marks a transition into the migration-focused period. Route design becomes particularly important as conditions change.",
+    tags:["Migration","Wildlife","Route Design"],
+    image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  July:{
+    label:"Migration Season",
+    text:"July is a major migration-focused window across the Serengeti–Mara ecosystem, with strong wildlife viewing opportunities.",
+    tags:["Migration","Wildlife","Mara"],
+    image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  August:{
+    label:"Migration Season",
+    text:"August is strongly associated with migration-focused safari travel in the Serengeti and Maasai Mara. The exact wildlife experience varies by location and conditions.",
+    tags:["Migration","Predators","Photography"],
+    image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  September:{
+    label:"Migration & Wildlife",
+    text:"September continues the migration-focused window, with the Mara–Serengeti ecosystem offering a powerful combination of wildlife and landscapes.",
+    tags:["Migration","Wildlife","Big Five"],
+    image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  October:{
+    label:"Migration / Dry-season Wildlife",
+    text:"October can combine migration interest with classic wildlife viewing, depending on the route and region selected.",
+    tags:["Migration","Wildlife","Classic Safari"],
+    image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  November:{
+    label:"Green & Festive",
+    text:"Short rains can bring fresh landscapes and a different safari atmosphere, while festive travel becomes an option later in the period.",
+    tags:["Green","Wildlife","Festive"],
+    image:"https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85"
+  },
+
+  December:{
+    label:"Green & Festive",
+    text:"December combines wildlife opportunities with festive travel possibilities and can pair naturally with a Zanzibar extension.",
+    tags:["Wildlife","Festive","Zanzibar"],
+    image:"https://images.unsplash.com/photo-1523480717984-24cba35ae1ef?auto=format&fit=crop&w=1200&q=85"
+  }
+
+};
+
+const months = Object.keys(seasonData);
+
+let monthIndex = new Date().getMonth();
+
+function setSeason(month){
+
+  const d = seasonData[month] || seasonData.January;
+
+  document
+    .querySelectorAll(".month")
+    .forEach(b =>
+      b.classList.toggle(
+        "active",
+        b.dataset.month === month
+      )
+    );
+
+  document.getElementById("seasonMonth").textContent =
+    month.slice(0,3).toUpperCase();
+
+  document.getElementById("seasonTitle").textContent =
+    d.label;
+
+  document.getElementById("seasonText").textContent =
+    d.text;
+
+  document.getElementById("seasonImage").src =
+    d.image;
+
+  document.getElementById("seasonTags").innerHTML =
+    d.tags
+      .map(t => `<span class="tag-pill">${t}</span>`)
+      .join("");
+
+}
+
+document
+  .querySelectorAll(".month")
+  .forEach(btn =>
+    btn.addEventListener(
+      "click",
+      () => setSeason(btn.dataset.month)
+    )
+  );
+
+function cycleMonth(){
+
+  const m = months[monthIndex];
+
+  document.getElementById("quickMonth").textContent =
+    m;
+
+  setSeason(m);
+
+  monthIndex =
+    (monthIndex + 1) % 12;
+}
+
+function toast(message){
+
+  const t =
+    document.getElementById("toast");
+
+  t.textContent =
+    message;
+
+  t.classList.add("show");
+
+  clearTimeout(window.__toast);
+
+  window.__toast =
+    setTimeout(
+      () => t.classList.remove("show"),
+      2600
+    );
+}
+
+
+/*
+  QUICK EXPERT FORM
+
+  This sends the enquiry to the Apps Script API
+  configured through SUNSOIL_CONFIG.WRITE_API_URL.
+
+  The final API adapter will translate this into
+  the same Trip_Requests / Analytics / Email process
+  used by the main safari planner.
+*/
+
+document
+  .getElementById("quickExpertForm")
+  .addEventListener(
+    "submit",
+    async e => {
+
+      e.preventDefault();
+
+      const mobile =
+        document
+          .getElementById("expertMobile")
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("expertEmail")
+          .value
+          .trim();
+
+      if(!mobile || !email){
+
+        toast(
+          "Please enter your mobile number and email."
+        );
+
+        return;
+      }
+
+      const payload = {
+
+        source:
+          "Homepage Quick Expert",
+
+        country:
+          document
+            .getElementById("expertCountry")
+            .value,
+
+        travelMonth:
+          document
+            .getElementById("expertMonth")
+            .value,
+
+        adults:
+          Number(
+            document
+              .getElementById("expertAdults")
+              .value || 2
+          ),
+
+        children:
+          Number(
+            document
+              .getElementById("expertChildren")
+              .value || 0
+          ),
+
+        mobile,
+        email
+
+      };
+
+      const api =
+        window.SUNSOIL_CONFIG &&
+        window.SUNSOIL_CONFIG.WRITE_API_URL;
+
+      if(
+        api &&
+        !api.includes("PASTE_")
+      ){
+
+        try{
+
+          const res =
+            await fetch(
+              api,
+              {
+                method:"POST",
+                headers:{
+                  "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+                body:
+                  JSON.stringify(payload)
+              }
+            );
+
+          if(res.ok){
+
+            toast(
+              "Thank you. Your enquiry is with Sun & Soil."
+            );
+
+            e.target.reset();
+
+            return;
+          }
+
+        }catch(err){
+
+          console.error(
+            "Sun & Soil API error:",
+            err
+          );
+
+        }
+
+      }
+
+      sessionStorage.setItem(
+        "sunsoil_quick_enquiry",
+        JSON.stringify(payload)
+      );
+
+      toast(
+        "Your enquiry is ready. Connect the Apps Script API in config.js to send it to your Sheet."
+      );
+
+    }
+  );
+
+
+/* SCROLL REVEAL */
+
+const io =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(
+        entry => {
+
+          if(entry.isIntersecting){
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+            io.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold:.08
+    }
+  );
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(
+    el => io.observe(el)
+  );
+
+
+/* YEAR */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* PAGE LOAD */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    setSeason("January");
+
+    setTimeout(
+      () =>
+        document
+          .getElementById("preloader")
+          .classList.add("hide"),
+      500
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>

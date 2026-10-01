@@ -1,0 +1,6801 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="theme-color"
+  content="#050b07">
+
+<meta
+  name="description"
+  content="Build your personalised Kenya and Tanzania safari with Sun & Soil Destinations.">
+
+<title>Build Your Safari | Sun & Soil</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
+
+<!-- Leaflet -->
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  crossorigin="">
+
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+
+<style>
+
+/* =========================================================
+   SUN & SOIL — SAFARI BUILDER
+   ========================================================= */
+
+:root{
+
+  --forest:#07110b;
+  --forest2:#0c1d13;
+  --forest3:#122a1b;
+
+  --gold:#c9a45d;
+  --gold2:#e1c581;
+
+  --ivory:#f7f4ec;
+  --cream:#eee9dc;
+  --white:#ffffff;
+
+  --ink:#142018;
+  --muted:#727a73;
+
+  --line:rgba(17,34,23,.10);
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Manrope",Arial,sans-serif;
+
+  --shadow:0 25px 80px rgba(8,25,15,.13);
+
+}
+
+
+/* RESET */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  margin:0;
+
+  background:#e9e6dc;
+
+  color:var(--ink);
+
+  font-family:var(--sans);
+
+  overflow-x:hidden;
+
+}
+
+body.locked{
+  overflow:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+/* APP SHELL */
+
+.app-shell{
+
+  width:min(1440px,calc(100% - 28px));
+
+  margin:14px auto 28px;
+
+  background:var(--ivory);
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.topnav{
+
+  height:78px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:0 32px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:200;
+
+  background:rgba(247,244,236,.88);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(0,0,0,.05);
+
+}
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+}
+
+.logo-mark{
+
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  background:var(--forest);
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+.logo-mark:before{
+
+  content:"";
+
+  position:absolute;
+
+  width:43px;
+  height:13px;
+
+  border:2px solid var(--gold);
+
+  border-radius:50%;
+
+  left:-3px;
+  top:11px;
+
+  transform:rotate(-12deg);
+
+}
+
+.logo-mark:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  left:14px;
+  top:14px;
+
+}
+
+.brand-name{
+
+  display:block;
+
+  font-size:13px;
+
+  letter-spacing:.12em;
+
+  font-weight:800;
+
+}
+
+.brand-tag{
+
+  display:block;
+
+  font-size:7px;
+
+  letter-spacing:.17em;
+
+  text-transform:uppercase;
+
+  color:#858b84;
+
+  margin-top:3px;
+
+}
+
+.nav-links{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:28px;
+
+}
+
+.nav-links a{
+
+  font-size:11px;
+
+  font-weight:700;
+
+  padding:29px 0;
+
+  position:relative;
+
+}
+
+.nav-links a.active:after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:18px;
+
+  left:0;
+  right:0;
+
+  height:2px;
+
+  background:var(--gold);
+
+}
+
+.nav-cta{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  border:0;
+
+  border-radius:999px;
+
+  padding:12px 17px;
+
+  background:var(--forest);
+
+  color:#fff;
+
+  font-size:9px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   BUILDER HERO
+   ========================================================= */
+
+.builder-hero{
+
+  min-height:430px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  color:#fff;
+
+  background:
+
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(201,164,93,.18),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      135deg,
+      #07110b,
+      #10291a
+    );
+
+}
+
+.hero-background{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:.44;
+
+}
+
+.hero-background img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+.builder-hero:after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(4,12,8,.98) 0%,
+      rgba(4,12,8,.88) 38%,
+      rgba(4,12,8,.30) 100%
+    );
+
+}
+
+.hero-content{
+
+  position:relative;
+
+  z-index:2;
+
+  max-width:800px;
+
+  padding:75px 48px 72px;
+
+}
+
+.eyebrow{
+
+  font-size:9px;
+
+  letter-spacing:.25em;
+
+  text-transform:uppercase;
+
+  color:var(--gold2);
+
+  font-weight:900;
+
+}
+
+.hero-title{
+
+  font-family:var(--serif);
+
+  font-size:clamp(58px,7vw,96px);
+
+  line-height:.82;
+
+  letter-spacing:-.045em;
+
+  font-weight:600;
+
+  margin:18px 0 22px;
+
+}
+
+.hero-title em{
+
+  font-style:italic;
+
+  color:#dfc581;
+
+}
+
+.hero-description{
+
+  max-width:540px;
+
+  font-size:12px;
+
+  line-height:1.8;
+
+  color:rgba(255,255,255,.65);
+
+  margin:0;
+
+}
+
+.hero-progress{
+
+  position:absolute;
+
+  z-index:3;
+
+  left:48px;
+
+  right:48px;
+
+  bottom:25px;
+
+  display:flex;
+
+  gap:7px;
+
+}
+
+.progress-line{
+
+  flex:1;
+
+  height:3px;
+
+  border-radius:99px;
+
+  background:rgba(255,255,255,.17);
+
+  overflow:hidden;
+
+}
+
+.progress-line span{
+
+  display:block;
+
+  height:100%;
+
+  width:0;
+
+  background:var(--gold);
+
+  transition:.5s;
+
+}
+
+.progress-label{
+
+  position:absolute;
+
+  right:48px;
+
+  bottom:38px;
+
+  font-size:8px;
+
+  color:rgba(255,255,255,.55);
+
+}
+
+
+/* =========================================================
+   BUILDER BODY
+   ========================================================= */
+
+.builder{
+
+  padding:55px 34px 90px;
+
+  background:
+
+    radial-gradient(
+      circle at 80% 5%,
+      rgba(207,191,151,.12),
+      transparent 25%
+    ),
+
+    var(--ivory);
+
+}
+
+.step{
+
+  display:none;
+
+  animation:stepIn .45s ease both;
+
+}
+
+.step.active{
+
+  display:block;
+
+}
+
+@keyframes stepIn{
+
+  from{
+
+    opacity:0;
+
+    transform:translateY(18px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:none;
+
+  }
+
+}
+
+.step-heading{
+
+  max-width:750px;
+
+  margin:0 auto 35px;
+
+  text-align:center;
+
+}
+
+.step-number{
+
+  width:38px;
+  height:38px;
+
+  margin:0 auto 13px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:var(--forest);
+
+  color:var(--gold2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+}
+
+.step-kicker{
+
+  font-size:8px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.22em;
+
+  color:#95783f;
+
+  font-weight:900;
+
+}
+
+.step-heading h2{
+
+  font-family:var(--serif);
+
+  font-size:clamp(45px,5vw,68px);
+
+  line-height:.88;
+
+  letter-spacing:-.04em;
+
+  margin:9px 0 13px;
+
+  font-weight:600;
+
+}
+
+.step-heading p{
+
+  margin:0 auto;
+
+  max-width:560px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.7;
+
+}
+
+
+/* =========================================================
+   CHOICE CARDS
+   ========================================================= */
+
+.choice-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:16px;
+
+  max-width:1000px;
+
+  margin:0 auto;
+
+}
+
+.choice-card{
+
+  min-height:290px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:25px;
+
+  background:#fff;
+
+  border:2px solid transparent;
+
+  box-shadow:0 12px 38px rgba(16,32,23,.07);
+
+  transition:.3s;
+
+  cursor:pointer;
+
+}
+
+.choice-card:hover{
+
+  transform:translateY(-5px);
+
+  box-shadow:0 22px 55px rgba(16,32,23,.13);
+
+}
+
+.choice-card.selected{
+
+  border-color:var(--gold);
+
+  box-shadow:
+
+    0 0 0 4px rgba(201,164,93,.13),
+
+    0 22px 55px rgba(16,32,23,.13);
+
+}
+
+.choice-image{
+
+  position:absolute;
+
+  inset:0;
+
+}
+
+.choice-image:after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.03) 20%,
+      rgba(0,0,0,.80) 100%
+    );
+
+}
+
+.choice-content{
+
+  position:absolute;
+
+  z-index:2;
+
+  left:22px;
+  right:22px;
+  bottom:20px;
+
+  color:#fff;
+
+}
+
+.choice-content small{
+
+  font-size:8px;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  color:#e2c785;
+
+  font-weight:900;
+
+}
+
+.choice-content h3{
+
+  font-family:var(--serif);
+
+  font-size:46px;
+
+  line-height:.85;
+
+  margin:5px 0;
+
+}
+
+.choice-content p{
+
+  margin:0;
+
+  font-size:9px;
+
+  line-height:1.55;
+
+  color:rgba(255,255,255,.68);
+
+}
+
+.choice-check{
+
+  position:absolute;
+
+  z-index:4;
+
+  top:16px;
+  right:16px;
+
+  width:34px;
+  height:34px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(255,255,255,.30);
+
+  background:rgba(0,0,0,.18);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
+
+}
+
+.choice-card.selected .choice-check{
+
+  background:var(--gold);
+
+  border-color:var(--gold);
+
+  color:var(--forest);
+
+}
+
+
+/* =========================================================
+   DESTINATION CARDS
+   ========================================================= */
+
+.destination-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:14px;
+
+  max-width:1100px;
+
+  margin:auto;
+
+}
+
+.destination-choice{
+
+  min-height:220px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:#fff;
+
+  border:2px solid transparent;
+
+  cursor:pointer;
+
+  transition:.28s;
+
+}
+
+.destination-choice:hover{
+
+  transform:translateY(-4px);
+
+}
+
+.destination-choice.selected{
+
+  border-color:var(--gold);
+
+  box-shadow:0 0 0 4px rgba(201,164,93,.11);
+
+}
+
+.destination-choice img{
+
+  position:absolute;
+
+  inset:0;
+
+}
+
+.destination-choice:after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      transparent 25%,
+      rgba(0,0,0,.82)
+    );
+
+}
+
+.destination-info{
+
+  position:absolute;
+
+  z-index:2;
+
+  left:16px;
+  right:16px;
+  bottom:16px;
+
+  color:#fff;
+
+}
+
+.destination-info small{
+
+  font-size:7px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  color:#e0c17d;
+
+  font-weight:900;
+
+}
+
+.destination-info h3{
+
+  font-family:var(--serif);
+
+  font-size:33px;
+
+  margin:3px 0;
+
+}
+
+.destination-info p{
+
+  margin:0;
+
+  font-size:8px;
+
+  line-height:1.5;
+
+  color:rgba(255,255,255,.64);
+
+}
+
+.destination-selected{
+
+  position:absolute;
+
+  z-index:4;
+
+  right:12px;
+  top:12px;
+
+  width:31px;
+  height:31px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(0,0,0,.22);
+
+  border:1px solid rgba(255,255,255,.28);
+
+  color:#fff;
+
+  backdrop-filter:blur(10px);
+
+}
+
+.destination-choice.selected .destination-selected{
+
+  background:var(--gold);
+
+  color:var(--forest);
+
+}
+
+
+/* =========================================================
+   NUMBER / OPTION CARDS
+   ========================================================= */
+
+.number-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:12px;
+
+  max-width:800px;
+
+  margin:auto;
+
+}
+
+.number-card{
+
+  padding:28px 18px;
+
+  border-radius:20px;
+
+  background:#fff;
+
+  border:2px solid transparent;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.number-card:hover{
+
+  transform:translateY(-3px);
+
+}
+
+.number-card.selected{
+
+  background:var(--forest);
+
+  color:#fff;
+
+  border-color:var(--gold);
+
+}
+
+.number-big{
+
+  display:block;
+
+  font-family:var(--serif);
+
+  font-size:42px;
+
+  line-height:1;
+
+}
+
+.number-label{
+
+  display:block;
+
+  margin-top:6px;
+
+  font-size:8px;
+
+  color:#777f78;
+
+}
+
+.number-card.selected .number-label{
+
+  color:rgba(255,255,255,.60);
+
+}
+
+
+/* =========================================================
+   MONTH SELECTOR
+   ========================================================= */
+
+.month-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:10px;
+
+  max-width:850px;
+
+  margin:auto;
+
+}
+
+.month-card{
+
+  min-height:92px;
+
+  padding:14px;
+
+  border-radius:17px;
+
+  background:#fff;
+
+  border:2px solid transparent;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  transition:.25s;
+
+}
+
+.month-card:hover{
+
+  transform:translateY(-3px);
+
+}
+
+.month-card.selected{
+
+  background:var(--forest);
+
+  color:#fff;
+
+  border-color:var(--gold);
+
+}
+
+.month-name{
+
+  font-family:var(--serif);
+
+  font-size:26px;
+
+  line-height:1;
+
+}
+
+.month-season{
+
+  font-size:7px;
+
+  color:#858c86;
+
+  margin-top:7px;
+
+  line-height:1.4;
+
+}
+
+.month-card.selected .month-season{
+
+  color:rgba(255,255,255,.55);
+
+}
+
+
+/* =========================================================
+   EXPERIENCE CARDS
+   ========================================================= */
+
+.experience-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:13px;
+
+  max-width:1100px;
+
+  margin:auto;
+
+}
+
+.experience-choice{
+
+  height:230px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:21px;
+
+  border:2px solid transparent;
+
+  cursor:pointer;
+
+  background:#fff;
+
+  transition:.28s;
+
+}
+
+.experience-choice:hover{
+
+  transform:translateY(-4px);
+
+}
+
+.experience-choice.selected{
+
+  border-color:var(--gold);
+
+  box-shadow:0 0 0 4px rgba(201,164,93,.11);
+
+}
+
+.experience-choice img{
+
+  position:absolute;
+
+  inset:0;
+
+}
+
+.experience-choice:after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(0,0,0,.83)
+    );
+
+}
+
+.experience-copy{
+
+  position:absolute;
+
+  z-index:2;
+
+  left:15px;
+  right:15px;
+  bottom:15px;
+
+  color:#fff;
+
+}
+
+.experience-copy small{
+
+  font-size:7px;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  color:#dfc47f;
+
+  font-weight:900;
+
+}
+
+.experience-copy h3{
+
+  font-family:var(--serif);
+
+  font-size:29px;
+
+  margin:4px 0;
+
+}
+
+.experience-copy p{
+
+  font-size:8px;
+
+  line-height:1.45;
+
+  color:rgba(255,255,255,.63);
+
+  margin:0;
+
+}
+
+.exp-check{
+
+  position:absolute;
+
+  z-index:3;
+
+  right:11px;
+  top:11px;
+
+  width:29px;
+  height:29px;
+
+  border-radius:50%;
+
+  background:rgba(0,0,0,.20);
+
+  border:1px solid rgba(255,255,255,.28);
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+}
+
+.experience-choice.selected .exp-check{
+
+  background:var(--gold);
+
+  color:var(--forest);
+
+}
+
+
+/* =========================================================
+   ROUTE MAP
+   ========================================================= */
+
+.route-layout{
+
+  display:grid;
+
+  grid-template-columns:1.35fr .65fr;
+
+  gap:16px;
+
+  max-width:1200px;
+
+  margin:auto;
+
+}
+
+.map-card{
+
+  min-height:610px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:27px;
+
+  background:#050b07;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:0 20px 55px rgba(0,0,0,.15);
+
+}
+
+#safariMap{
+
+  position:absolute;
+
+  inset:0;
+
+  background:#050b07;
+
+}
+
+
+/*
+  Make Leaflet dark.
+*/
+
+.leaflet-container{
+
+  background:#050b07;
+
+  font-family:var(--sans);
+
+}
+
+.leaflet-control-zoom{
+
+  border:0!important;
+
+  box-shadow:none!important;
+
+}
+
+.leaflet-control-zoom a{
+
+  background:#0b1c12!important;
+
+  color:#d9bd7c!important;
+
+  border:1px solid rgba(255,255,255,.10)!important;
+
+}
+
+.map-top{
+
+  position:absolute;
+
+  z-index:600;
+
+  top:18px;
+  left:18px;
+  right:18px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  pointer-events:none;
+
+}
+
+.map-title{
+
+  padding:11px 14px;
+
+  border-radius:999px;
+
+  background:rgba(4,12,8,.75);
+
+  backdrop-filter:blur(15px);
+
+  border:1px solid rgba(255,255,255,.12);
+
+  color:#fff;
+
+  font-size:8px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  font-weight:900;
+
+}
+
+.map-status{
+
+  padding:10px 12px;
+
+  border-radius:999px;
+
+  background:rgba(4,12,8,.75);
+
+  backdrop-filter:blur(15px);
+
+  border:1px solid rgba(255,255,255,.12);
+
+  color:#d9bd7c;
+
+  font-size:8px;
+
+}
+
+.route-panel{
+
+  border-radius:27px;
+
+  background:#fff;
+
+  padding:24px;
+
+  min-height:610px;
+
+  box-shadow:0 12px 38px rgba(16,32,23,.08);
+
+}
+
+.route-panel h3{
+
+  font-family:var(--serif);
+
+  font-size:40px;
+
+  line-height:.9;
+
+  margin:4px 0 9px;
+
+}
+
+.route-panel p{
+
+  font-size:9px;
+
+  color:#747c75;
+
+  line-height:1.6;
+
+  margin:0 0 20px;
+
+}
+
+.route-timeline{
+
+  position:relative;
+
+  margin-top:20px;
+
+}
+
+.route-timeline:before{
+
+  content:"";
+
+  position:absolute;
+
+  left:8px;
+
+  top:7px;
+
+  bottom:7px;
+
+  width:1px;
+
+  background:#ddd8cc;
+
+}
+
+.route-stop{
+
+  position:relative;
+
+  padding:0 0 22px 28px;
+
+}
+
+.route-dot{
+
+  position:absolute;
+
+  left:0;
+
+  top:2px;
+
+  width:17px;
+  height:17px;
+
+  border-radius:50%;
+
+  background:#e7e2d6;
+
+  border:4px solid #fff;
+
+  box-shadow:0 0 0 1px #c9c1b0;
+
+}
+
+.route-stop.active .route-dot{
+
+  background:var(--gold);
+
+  box-shadow:0 0 0 1px var(--gold);
+
+}
+
+.route-stop strong{
+
+  display:block;
+
+  font-family:var(--serif);
+
+  font-size:23px;
+
+  line-height:1;
+
+}
+
+.route-stop span{
+
+  display:block;
+
+  font-size:7px;
+
+  color:#7c837d;
+
+  margin-top:5px;
+
+}
+
+.route-day{
+
+  display:inline-block;
+
+  margin-top:7px;
+
+  padding:5px 7px;
+
+  border-radius:999px;
+
+  background:#f0ece2;
+
+  font-size:6px;
+
+  color:#667168;
+
+  font-weight:900;
+
+}
+
+
+/* SAFARI VEHICLE */
+
+.safari-car{
+
+  width:38px;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--gold);
+
+  border:2px solid #fff;
+
+  border-radius:7px 9px 5px 5px;
+
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+
+  color:#09130d;
+
+  font-size:13px;
+
+}
+
+
+/* =========================================================
+   REVIEW
+   ========================================================= */
+
+.review-layout{
+
+  max-width:1100px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:1fr .72fr;
+
+  gap:16px;
+
+}
+
+.review-card{
+
+  background:#fff;
+
+  border-radius:25px;
+
+  padding:25px;
+
+  box-shadow:0 12px 40px rgba(16,32,23,.07);
+
+}
+
+.review-card h3{
+
+  font-family:var(--serif);
+
+  font-size:35px;
+
+  margin:0 0 20px;
+
+}
+
+.summary-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:9px;
+
+}
+
+.summary-item{
+
+  padding:13px;
+
+  border-radius:14px;
+
+  background:#f2eee5;
+
+}
+
+.summary-item small{
+
+  display:block;
+
+  font-size:7px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.13em;
+
+  color:#888f88;
+
+  font-weight:900;
+
+}
+
+.summary-item strong{
+
+  display:block;
+
+  font-size:10px;
+
+  margin-top:5px;
+
+}
+
+.selected-list{
+
+  margin-top:18px;
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+}
+
+.selected-tag{
+
+  padding:7px 9px;
+
+  border-radius:999px;
+
+  background:var(--forest);
+
+  color:#fff;
+
+  font-size:7px;
+
+}
+
+
+/* CONTACT FORM */
+
+.form-grid{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
+}
+
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:6px;
+
+}
+
+.field.full{
+
+  grid-column:1/-1;
+
+}
+
+.field label{
+
+  font-size:7px;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+  color:#737b74;
+
+  font-weight:900;
+
+}
+
+.field input,
+.field textarea,
+.field select{
+
+  width:100%;
+
+  border:1px solid #ddd8cd;
+
+  background:#faf8f2;
+
+  border-radius:12px;
+
+  padding:12px 13px;
+
+  outline:none;
+
+  color:var(--ink);
+
+  font-size:10px;
+
+  transition:.2s;
+
+}
+
+.field textarea{
+
+  min-height:95px;
+
+  resize:vertical;
+
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+
+  border-color:var(--gold);
+
+  box-shadow:0 0 0 3px rgba(201,164,93,.10);
+
+}
+
+
+/* =========================================================
+   NAVIGATION BUTTONS
+   ========================================================= */
+
+.step-actions{
+
+  max-width:1000px;
+
+  margin:38px auto 0;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+}
+
+.action-btn{
+
+  border:0;
+
+  border-radius:999px;
+
+  padding:14px 23px;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  transition:.25s;
+
+}
+
+.action-btn.primary{
+
+  background:var(--forest);
+
+  color:#fff;
+
+}
+
+.action-btn.primary:hover{
+
+  transform:translateY(-2px);
+
+  background:#153722;
+
+}
+
+.action-btn.secondary{
+
+  background:#fff;
+
+  color:var(--forest);
+
+  border:1px solid rgba(15,32,22,.10);
+
+}
+
+.action-btn:disabled{
+
+  opacity:.38;
+
+  cursor:not-allowed;
+
+  transform:none!important;
+
+}
+
+
+/* =========================================================
+   LOADING OVERLAY
+   ========================================================= */
+
+.loading-overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:1000;
+
+  background:rgba(4,12,8,.78);
+
+  backdrop-filter:blur(14px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+.loading-overlay.show{
+
+  display:flex;
+
+}
+
+.loading-box{
+
+  width:min(370px,calc(100% - 40px));
+
+  background:#fff;
+
+  border-radius:24px;
+
+  padding:30px;
+
+  text-align:center;
+
+}
+
+.spinner{
+
+  width:40px;
+  height:40px;
+
+  margin:0 auto 15px;
+
+  border:3px solid #e7e1d5;
+
+  border-top-color:var(--gold);
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+.loading-box h3{
+
+  font-family:var(--serif);
+
+  font-size:30px;
+
+  margin:0 0 7px;
+
+}
+
+.loading-box p{
+
+  margin:0;
+
+  font-size:9px;
+
+  line-height:1.6;
+
+  color:#737b74;
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+
+  position:fixed;
+
+  z-index:1100;
+
+  left:50%;
+
+  bottom:22px;
+
+  transform:translate(-50%,20px);
+
+  background:var(--forest);
+
+  color:#fff;
+
+  padding:12px 17px;
+
+  border-radius:999px;
+
+  font-size:9px;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.3s;
+
+}
+
+.toast.show{
+
+  opacity:1;
+
+  transform:translate(-50%,0);
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+
+  background:#061009;
+
+  color:#fff;
+
+  padding:40px 34px;
+
+  display:grid;
+
+  grid-template-columns:1.4fr 1fr 1fr 1fr;
+
+  gap:30px;
+
+}
+
+.footer h4{
+
+  margin:0 0 13px;
+
+  font-size:8px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.16em;
+
+  color:var(--gold2);
+
+}
+
+.footer a,
+.footer p{
+
+  display:block;
+
+  font-size:9px;
+
+  line-height:1.7;
+
+  color:rgba(255,255,255,.50);
+
+  margin:7px 0;
+
+}
+
+.footer-bottom{
+
+  grid-column:1/-1;
+
+  border-top:1px solid rgba(255,255,255,.09);
+
+  padding-top:17px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  color:rgba(255,255,255,.30);
+
+  font-size:8px;
+
+}
+
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+.bottom-nav{
+
+  display:none;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1050px){
+
+  .choice-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .destination-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .experience-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .route-layout,
+  .review-layout{
+    grid-template-columns:1fr;
+  }
+
+  .route-panel{
+    min-height:auto;
+  }
+
+  .number-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:760px){
+
+  body{
+    background:var(--ivory);
+  }
+
+  .app-shell{
+    width:100%;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .topnav{
+    height:67px;
+    padding:0 16px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-cta{
+    padding:10px 13px;
+  }
+
+  .builder-hero{
+    min-height:410px;
+  }
+
+  .hero-content{
+    padding:58px 22px 70px;
+  }
+
+  .hero-title{
+    font-size:59px;
+  }
+
+  .hero-progress{
+    left:22px;
+    right:22px;
+  }
+
+  .progress-label{
+    right:22px;
+  }
+
+  .builder{
+    padding:48px 16px 90px;
+  }
+
+  .step-heading{
+    margin-bottom:27px;
+  }
+
+  .step-heading h2{
+    font-size:46px;
+  }
+
+  .choice-grid,
+  .destination-grid,
+  .experience-grid{
+    grid-template-columns:1fr;
+  }
+
+  .choice-card{
+    min-height:280px;
+  }
+
+  .destination-choice{
+    min-height:245px;
+  }
+
+  .experience-choice{
+    height:245px;
+  }
+
+  .number-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .month-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .route-layout{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .map-card{
+    min-height:470px;
+  }
+
+  .route-panel{
+    min-height:auto;
+  }
+
+  .review-layout{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .step-actions{
+    margin-top:25px;
+  }
+
+  .action-btn{
+    padding:13px 17px;
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+    padding:32px 20px 90px;
+  }
+
+  .footer-bottom{
+    grid-column:1/-1;
+    display:block;
+    line-height:1.8;
+  }
+
+  .bottom-nav{
+
+    display:grid;
+
+    position:fixed;
+
+    z-index:500;
+
+    left:12px;
+    right:12px;
+    bottom:12px;
+
+    grid-template-columns:repeat(4,1fr);
+
+    background:rgba(7,17,11,.95);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:19px;
+
+    padding:7px;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+
+  }
+
+  .bottom-nav a{
+
+    color:rgba(255,255,255,.52);
+
+    text-align:center;
+
+    font-size:7px;
+
+    padding:5px;
+
+  }
+
+  .bottom-nav a.active{
+    color:var(--gold2);
+  }
+
+  .bottom-nav span{
+
+    display:block;
+
+    font-size:14px;
+
+    margin-bottom:2px;
+
+  }
+
+}
+
+@media(max-width:430px){
+
+  .hero-title{
+    font-size:53px;
+  }
+
+  .choice-content h3{
+    font-size:40px;
+  }
+
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* =========================================================
+   LEAFLET CUSTOM MARKER
+   ========================================================= */
+
+.destination-marker{
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  border:4px solid #fff;
+
+  box-shadow:
+
+    0 0 0 4px rgba(201,164,93,.25),
+
+    0 5px 18px rgba(0,0,0,.4);
+
+}
+
+.destination-marker.start{
+
+  background:#fff;
+
+  border-color:var(--gold);
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+<!-- =======================================================
+     NAVIGATION
+     ======================================================= -->
+
+<header class="topnav">
+
+  <a
+    href="index.html"
+    class="brand">
+
+    <span class="logo-mark"></span>
+
+    <span>
+
+      <span class="brand-name">
+        SUN &amp; SOIL
+      </span>
+
+      <span class="brand-tag">
+        Destinations
+      </span>
+
+    </span>
+
+  </a>
+
+
+  <nav class="nav-links">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="explore.html">
+      Explore
+    </a>
+
+    <a
+      href="planner.html"
+      class="active">
+      Build Safari
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
+
+  </nav>
+
+
+  <a
+    href="contact.html"
+    class="nav-cta">
+
+    Talk to an Expert
+    →
+
+  </a>
+
+</header>
+
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<section class="builder-hero">
+
+  <div class="hero-background">
+
+    <img
+      id="plannerHeroImage"
+      src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1800&q=88"
+      alt="African safari">
+
+  </div>
+
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      Sun &amp; Soil · Safari Builder
+    </div>
+
+    <h1 class="hero-title">
+
+      Build your<br>
+
+      <em>own safari.</em>
+
+    </h1>
+
+    <p class="hero-description">
+
+      Start with a place, choose your days and travellers,
+      tell us when you want to go and what you want to
+      experience. We will shape those choices into a
+      personalised East African journey.
+
+    </p>
+
+  </div>
+
+
+  <div class="progress-label">
+
+    STEP
+    <span id="progressNumber">
+      1
+    </span>
+    OF 7
+
+  </div>
+
+
+  <div class="hero-progress">
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+    <div class="progress-line">
+      <span></span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     BUILDER
+     ======================================================= -->
+
+<main class="builder">
+
+
+<!-- =====================================================
+     STEP 1 — COUNTRY
+     ===================================================== -->
+
+<section
+  class="step active"
+  data-step="1"
+  id="step1">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      01
+    </div>
+
+    <div class="step-kicker">
+      Your journey begins here
+    </div>
+
+    <h2>
+      Where does your<br>
+      journey begin?
+    </h2>
+
+    <p>
+      Pick the country and starting region that feels
+      closest to the journey you have in mind. You can
+      combine Kenya and Tanzania later.
+    </p>
+
+  </div>
+
+
+  <div
+    class="choice-grid"
+    id="countryChoices">
+
+
+    <article
+      class="choice-card"
+      data-country="Kenya"
+      onclick="selectCountry('Kenya')">
+
+      <div class="choice-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1100&q=85"
+          alt="Kenya safari">
+
+      </div>
+
+      <span class="choice-check">
+        ✓
+      </span>
+
+      <div class="choice-content">
+
+        <small>
+          East Africa · Country
+        </small>
+
+        <h3>
+          Kenya
+        </h3>
+
+        <p>
+          Maasai Mara, Nairobi, Samburu,
+          Lake Nakuru and more.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article
+      class="choice-card"
+      data-country="Tanzania"
+      onclick="selectCountry('Tanzania')">
+
+      <div class="choice-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=1100&q=85"
+          alt="Tanzania safari">
+
+      </div>
+
+      <span class="choice-check">
+        ✓
+      </span>
+
+      <div class="choice-content">
+
+        <small>
+          East Africa · Country
+        </small>
+
+        <h3>
+          Tanzania
+        </h3>
+
+        <p>
+          Serengeti, Ngorongoro, Tarangire,
+          Arusha and Zanzibar.
+        </p>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <span></span>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Continue
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 2 — STARTING DESTINATION
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="2"
+  id="step2">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      02
+    </div>
+
+    <div class="step-kicker">
+      Choose your starting point
+    </div>
+
+    <h2>
+      Where would you<br>
+      love to wake up?
+    </h2>
+
+    <p>
+      Choose one or more places that interest you.
+      We will use these as the foundation for your route.
+    </p>
+
+  </div>
+
+
+  <div
+    class="destination-grid"
+    id="plannerDestinations">
+
+    <div
+      style="
+        grid-column:1/-1;
+        padding:40px;
+        text-align:center;
+        color:#777;
+      ">
+
+      Loading destinations…
+
+    </div>
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Back
+
+    </button>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Continue
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 3 — TRAVELLERS + DAYS
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="3"
+  id="step3">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      03
+    </div>
+
+    <div class="step-kicker">
+      Shape the journey
+    </div>
+
+    <h2>
+      How much time<br>
+      do you have?
+    </h2>
+
+    <p>
+      Your duration determines how much ground we can
+      comfortably cover without turning the safari into
+      a race between destinations.
+    </p>
+
+  </div>
+
+
+  <h3
+    style="
+      max-width:800px;
+      margin:0 auto 15px;
+      font-family:var(--serif);
+      font-size:30px;
+    ">
+
+    Number of travellers
+
+  </h3>
+
+
+  <div class="number-grid">
+
+    <button
+      class="number-card"
+      data-adults="1"
+      onclick="selectAdults(1)">
+
+      <span class="number-big">
+        1
+      </span>
+
+      <span class="number-label">
+        Solo traveller
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-adults="2"
+      onclick="selectAdults(2)">
+
+      <span class="number-big">
+        2
+      </span>
+
+      <span class="number-label">
+        Adults
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-adults="4"
+      onclick="selectAdults(4)">
+
+      <span class="number-big">
+        4
+      </span>
+
+      <span class="number-label">
+        Small group
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-adults="6"
+      onclick="selectAdults(6)">
+
+      <span class="number-big">
+        6+
+      </span>
+
+      <span class="number-label">
+        Group
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <h3
+    style="
+      max-width:800px;
+      margin:38px auto 15px;
+      font-family:var(--serif);
+      font-size:30px;
+    ">
+
+    Safari duration
+
+  </h3>
+
+
+  <div class="number-grid">
+
+    <button
+      class="number-card"
+      data-days="4"
+      onclick="selectDays(4)">
+
+      <span class="number-big">
+        4
+      </span>
+
+      <span class="number-label">
+        Days
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-days="6"
+      onclick="selectDays(6)">
+
+      <span class="number-big">
+        6
+      </span>
+
+      <span class="number-label">
+        Days
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-days="8"
+      onclick="selectDays(8)">
+
+      <span class="number-big">
+        8
+      </span>
+
+      <span class="number-label">
+        Days
+      </span>
+
+    </button>
+
+
+    <button
+      class="number-card"
+      data-days="10"
+      onclick="selectDays(10)">
+
+      <span class="number-big">
+        10+
+      </span>
+
+      <span class="number-label">
+        Days
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Back
+
+    </button>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Continue
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 4 — MONTH
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="4"
+  id="step4">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      04
+    </div>
+
+    <div class="step-kicker">
+      Season matters
+    </div>
+
+    <h2>
+      When would you<br>
+      like to travel?
+    </h2>
+
+    <p>
+      Every month tells a different safari story. Select
+      your travel month and we will show the seasonal
+      information from your planning database.
+    </p>
+
+  </div>
+
+
+  <div
+    class="month-grid"
+    id="monthGrid">
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Back
+
+    </button>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Continue
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 5 — EXPERIENCES
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="5"
+  id="step5">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      05
+    </div>
+
+    <div class="step-kicker">
+      Tell us what matters
+    </div>
+
+    <h2>
+      What do you want<br>
+      to experience?
+    </h2>
+
+    <p>
+      Pick as many as you like. These choices help shape
+      the recommendations and route around your interests.
+    </p>
+
+  </div>
+
+
+  <div
+    class="experience-grid"
+    id="plannerExperiences">
+
+    <div
+      style="
+        grid-column:1/-1;
+        padding:40px;
+        text-align:center;
+        color:#777;
+      ">
+
+      Loading experiences…
+
+    </div>
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Back
+
+    </button>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Build my route
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 6 — MAP + ROUTE
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="6"
+  id="step6">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      06
+    </div>
+
+    <div class="step-kicker">
+      Your route is taking shape
+    </div>
+
+    <h2>
+      Follow the<br>
+      safari trail.
+    </h2>
+
+    <p>
+      Your selected destinations now become a journey.
+      The route below is a planning preview — your
+      Safari Plan will be refined by our team.
+    </p>
+
+  </div>
+
+
+  <div class="route-layout">
+
+
+    <div class="map-card">
+
+      <div id="safariMap"></div>
+
+
+      <div class="map-top">
+
+        <div class="map-title">
+          Kenya × Tanzania · Safari Route
+        </div>
+
+        <div
+          class="map-status"
+          id="mapStatus">
+
+          Route ready
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <aside class="route-panel">
+
+      <div class="step-kicker">
+        Suggested journey
+      </div>
+
+      <h3>
+        Your route.
+      </h3>
+
+      <p id="routeDescription">
+
+        Based on your starting points,
+        duration and selected experiences.
+
+      </p>
+
+
+      <div
+        class="route-timeline"
+        id="routeTimeline">
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:18px;
+          padding:14px;
+          border-radius:15px;
+          background:#f2eee4;
+        ">
+
+        <small
+          style="
+            display:block;
+            font-size:7px;
+            letter-spacing:.12em;
+            text-transform:uppercase;
+            color:#888f88;
+            font-weight:900;
+          ">
+
+          Planning note
+
+        </small>
+
+        <p
+          style="
+            margin:5px 0 0;
+            font-size:8px;
+            line-height:1.6;
+            color:#6f776f;
+          ">
+
+          This route is an intelligent starting point.
+          Sun &amp; Soil will refine the final itinerary
+          around availability, travel time and your
+          preferences.
+
+        </p>
+
+      </div>
+
+    </aside>
+
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Back
+
+    </button>
+
+    <button
+      class="action-btn primary"
+      onclick="nextStep()">
+
+      Review my safari
+      →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 7 — REVIEW + CONTACT
+     ===================================================== -->
+
+<section
+  class="step"
+  data-step="7"
+  id="step7">
+
+
+  <div class="step-heading">
+
+    <div class="step-number">
+      07
+    </div>
+
+    <div class="step-kicker">
+      Almost there
+    </div>
+
+    <h2>
+      Let's make it<br>
+      personal.
+    </h2>
+
+    <p>
+      Review your choices and give us your contact details.
+      We'll use this information to prepare your personalised
+      Safari Plan.
+    </p>
+
+  </div>
+
+
+  <div class="review-layout">
+
+
+    <div class="review-card">
+
+      <h3>
+        Your safari brief
+      </h3>
+
+
+      <div class="summary-grid">
+
+
+        <div class="summary-item">
+
+          <small>
+            Country
+          </small>
+
+          <strong id="summaryCountry">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="summary-item">
+
+          <small>
+            Travellers
+          </small>
+
+          <strong id="summaryTravellers">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="summary-item">
+
+          <small>
+            Duration
+          </small>
+
+          <strong id="summaryDays">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="summary-item">
+
+          <small>
+            Travel month
+          </small>
+
+          <strong id="summaryMonth">
+            —
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div style="margin-top:22px">
+
+        <small
+          style="
+            font-size:7px;
+            text-transform:uppercase;
+            letter-spacing:.14em;
+            color:#858d86;
+            font-weight:900;
+          ">
+
+          Destinations
+
+        </small>
+
+        <div
+          class="selected-list"
+          id="summaryDestinations">
+
+        </div>
+
+      </div>
+
+
+      <div style="margin-top:19px">
+
+        <small
+          style="
+            font-size:7px;
+            text-transform:uppercase;
+            letter-spacing:.14em;
+            color:#858d86;
+            font-weight:900;
+          ">
+
+          Experiences
+
+        </small>
+
+        <div
+          class="selected-list"
+          id="summaryExperiences">
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="review-card">
+
+      <h3>
+        Your details
+      </h3>
+
+
+      <form
+        id="safariForm"
+        onsubmit="submitSafari(event)">
+
+
+        <div class="form-grid">
+
+
+          <div class="field">
+
+            <label for="name">
+              Name
+            </label>
+
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Your name">
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="nationality">
+              Nationality
+            </label>
+
+            <input
+              id="nationality"
+              name="nationality"
+              type="text"
+              placeholder="Nationality">
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="mobile">
+              Mobile *
+            </label>
+
+            <input
+              id="mobile"
+              name="mobile"
+              type="tel"
+              required
+              placeholder="+91...">
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="email">
+              Email *
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@example.com">
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="occasion">
+              Special occasion
+            </label>
+
+            <select
+              id="occasion"
+              name="specialOccasion">
+
+              <option value="">
+                None
+              </option>
+
+              <option>
+                Honeymoon
+              </option>
+
+              <option>
+                Anniversary
+              </option>
+
+              <option>
+                Birthday
+              </option>
+
+              <option>
+                Family celebration
+              </option>
+
+              <option>
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="dietary">
+              Dietary requirement
+            </label>
+
+            <input
+              id="dietary"
+              name="dietaryRequirement"
+              type="text"
+              placeholder="Optional">
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="notes">
+              Anything else?
+            </label>
+
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Tell us anything important about your safari..."></textarea>
+
+          </div>
+
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="action-btn primary"
+          style="
+            width:100%;
+            margin-top:17px;
+            justify-content:center;
+          ">
+
+          Create My Safari Plan
+          →
+
+        </button>
+
+
+      </form>
+
+
+      <p
+        style="
+          margin:13px 0 0;
+          font-size:7px;
+          line-height:1.55;
+          color:#8a908a;
+          text-align:center;
+        ">
+
+        No public rates are displayed here.
+        Your information is used to prepare your
+        personalised safari plan.
+
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="step-actions">
+
+    <button
+      class="action-btn secondary"
+      onclick="prevStep()">
+
+      ←
+      Edit choices
+
+    </button>
+
+    <span></span>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer class="footer">
+
+  <div>
+
+    <a
+      href="index.html"
+      class="brand">
+
+      <span class="logo-mark"></span>
+
+      <span>
+
+        <span
+          class="brand-name"
+          style="color:#fff">
+
+          SUN &amp; SOIL
+
+        </span>
+
+        <span
+          class="brand-tag"
+          style="color:#89938b">
+
+          Destinations
+
+        </span>
+
+      </span>
+
+    </a>
+
+    <p>
+      Crafting Soulful Journeys across Kenya,
+      Tanzania and beyond.
+    </p>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Explore
+    </h4>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="explore.html">
+      Destinations
+    </a>
+
+    <a href="planner.html">
+      Build Safari
+    </a>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Contact
+    </h4>
+
+    <a href="tel:+919637146111">
+      India · +91 9637146111
+    </a>
+
+    <a href="tel:+255657313330">
+      Tanzania · +255 657 313 330
+    </a>
+
+    <a href="mailto:info@sunandsoildestinations.com">
+      info@sunandsoildestinations.com
+    </a>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Our promise
+    </h4>
+
+    <p>
+      Thoughtful routes, meaningful experiences
+      and journeys shaped around you.
+    </p>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      ©
+      <span id="footerYear"></span>
+      Sun &amp; Soil Destinations Pvt. Ltd.
+    </span>
+
+    <span>
+      Crafting Soulful Journeys
+    </span>
+
+  </div>
+
+</footer>
+
+
+</div>
+
+
+<!-- =======================================================
+     MOBILE NAV
+     ======================================================= -->
+
+<nav class="bottom-nav">
+
+  <a href="index.html">
+
+    <span>⌂</span>
+
+    Home
+
+  </a>
+
+
+  <a href="explore.html">
+
+    <span>◉</span>
+
+    Explore
+
+  </a>
+
+
+  <a
+    href="planner.html"
+    class="active">
+
+    <span>⌖</span>
+
+    Build
+
+  </a>
+
+
+  <a href="contact.html">
+
+    <span>✦</span>
+
+    Contact
+
+  </a>
+
+</nav>
+
+
+<!-- =======================================================
+     LOADING
+     ======================================================= -->
+
+<div
+  class="loading-overlay"
+  id="loadingOverlay">
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <h3>
+      Creating your safari plan
+    </h3>
+
+    <p>
+      We're putting your destinations,
+      experiences and travel preferences together.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<!-- LEAFLET -->
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  crossorigin="">
+</script>
+
+
+<script>
+
+/* =========================================================
+   SUN & SOIL — PLANNER ENGINE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   GLOBAL DATA
+   --------------------------------------------------------- */
+
+let PLANNER_DATA = {
+
+  Destinations:[],
+  Seasons:[],
+  Experiences:[],
+  Images:[],
+  Routes:[],
+  Packages:[]
+
+};
+
+
+let state = {
+
+  step:1,
+
+  country:"",
+
+  destinations:[],
+
+  experiences:[],
+
+  adults:2,
+
+  children:0,
+
+  days:6,
+
+  month:"",
+
+  travelDate:"",
+
+  travelStyle:"",
+
+  name:"",
+
+  mobile:"",
+
+  email:"",
+
+  nationality:"",
+
+  occasion:"",
+
+  dietary:"",
+
+  notes:""
+
+};
+
+
+let safariMap = null;
+
+let routeLine = null;
+
+let routeMarkers = [];
+
+let safariVehicle = null;
+
+
+/* ---------------------------------------------------------
+   FALLBACK DATA
+   --------------------------------------------------------- */
+
+const FALLBACK_DESTINATIONS = [
+
+  {
+    Destination_ID:"KEN_MARA",
+    Country:"Kenya",
+    Destination_Name:"Maasai Mara",
+    Region:"South-West Kenya",
+    Short_Description:"Iconic wildlife country known for big cats, open grasslands and the Great Migration.",
+    Best_For:"Great Migration, Big Five, Wildlife, Photography",
+    Suggested_Days:3,
+    Map_Lat:-1.4061,
+    Map_Lng:35.0022,
+    Image_URL:"https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"KEN_NAIROBI",
+    Country:"Kenya",
+    Destination_Name:"Nairobi",
+    Region:"Central Kenya",
+    Short_Description:"A dynamic gateway to Kenya with wildlife, culture and easy safari connections.",
+    Best_For:"City, Culture, Wildlife, Gateway",
+    Suggested_Days:1,
+    Map_Lat:-1.2864,
+    Map_Lng:36.8172,
+    Image_URL:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"KEN_NAKURU",
+    Country:"Kenya",
+    Destination_Name:"Lake Nakuru",
+    Region:"Rift Valley",
+    Short_Description:"A scenic Rift Valley destination with wildlife, viewpoints and dramatic landscapes.",
+    Best_For:"Wildlife, Photography, Family",
+    Suggested_Days:1,
+    Map_Lat:-0.3031,
+    Map_Lng:36.0800,
+    Image_URL:"https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"KEN_SAMBURU",
+    Country:"Kenya",
+    Destination_Name:"Samburu",
+    Region:"Northern Kenya",
+    Short_Description:"A striking northern landscape with unique wildlife and a distinct cultural character.",
+    Best_For:"Wildlife, Culture, Photography",
+    Suggested_Days:2,
+    Map_Lat:0.6167,
+    Map_Lng:37.5333,
+    Image_URL:"https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"TZA_ARUSHA",
+    Country:"Tanzania",
+    Destination_Name:"Arusha",
+    Region:"Northern Tanzania",
+    Short_Description:"The natural gateway to Northern Tanzania's legendary safari circuit.",
+    Best_For:"Gateway, Safari, Kilimanjaro",
+    Suggested_Days:1,
+    Map_Lat:-3.3869,
+    Map_Lng:36.6830,
+    Image_URL:"https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"TZA_SERENGETI",
+    Country:"Tanzania",
+    Destination_Name:"Serengeti",
+    Region:"Northern Tanzania",
+    Short_Description:"Endless plains, extraordinary wildlife and one of Africa's great natural spectacles.",
+    Best_For:"Great Migration, Big Five, Wildlife, Photography",
+    Suggested_Days:3,
+    Map_Lat:-2.3333,
+    Map_Lng:34.8333,
+    Image_URL:"https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"TZA_NGORONGORO",
+    Country:"Tanzania",
+    Destination_Name:"Ngorongoro",
+    Region:"Northern Tanzania",
+    Short_Description:"A spectacular volcanic caldera with exceptional wildlife viewing.",
+    Best_For:"Big Five, Wildlife, Photography",
+    Suggested_Days:2,
+    Map_Lat:-3.2,
+    Map_Lng:35.5,
+    Image_URL:"https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"TZA_TARANGIRE",
+    Country:"Tanzania",
+    Destination_Name:"Tarangire",
+    Region:"Northern Tanzania",
+    Short_Description:"Baobab landscapes, elephants and a quieter safari atmosphere.",
+    Best_For:"Elephants, Wildlife, Photography, Family",
+    Suggested_Days:1,
+    Map_Lat:-3.8333,
+    Map_Lng:36.0,
+    Image_URL:"https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Destination_ID:"TZA_ZANZIBAR",
+    Country:"Tanzania",
+    Destination_Name:"Zanzibar",
+    Region:"Indian Ocean",
+    Short_Description:"A tropical extension of beaches, culture and Indian Ocean heritage.",
+    Best_For:"Beach, Relaxation, Honeymoon, Culture",
+    Suggested_Days:3,
+    Map_Lat:-6.1659,
+    Map_Lng:39.2026,
+    Image_URL:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85"
+  }
+
+];
+
+
+const FALLBACK_EXPERIENCES = [
+
+  {
+    Experience_ID:"EXP_MIGRATION",
+    Category:"Wildlife",
+    Experience_Name:"Great Migration",
+    Short_Description:"Follow the seasonal movement of millions of wildebeest and zebra.",
+    Best_For:"Migration, Wildlife",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_BIG5",
+    Category:"Wildlife",
+    Experience_Name:"Big Five",
+    Short_Description:"Build a safari around the classic African wildlife experience.",
+    Best_For:"Wildlife, Big Five",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_PHOTO",
+    Category:"Photography",
+    Experience_Name:"Photography",
+    Short_Description:"Slow down and create a journey around landscapes and wildlife photography.",
+    Best_For:"Photography",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_CULTURE",
+    Category:"Culture",
+    Experience_Name:"Culture",
+    Short_Description:"Meet the people and discover the cultural stories behind the landscapes.",
+    Best_For:"Culture",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_FAMILY",
+    Category:"Family",
+    Experience_Name:"Family Safari",
+    Short_Description:"A thoughtfully paced safari designed around shared family experiences.",
+    Best_For:"Family",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_LUXURY",
+    Category:"Style",
+    Experience_Name:"Luxury",
+    Short_Description:"Add exceptional camps, lodges and slower-paced experiences.",
+    Best_For:"Luxury",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_BEACH",
+    Category:"Extension",
+    Experience_Name:"Beach Escape",
+    Short_Description:"Finish the safari with a few days beside the Indian Ocean.",
+    Best_For:"Beach, Relaxation",
+    Country:"Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85"
+  },
+
+  {
+    Experience_ID:"EXP_ADVENTURE",
+    Category:"Adventure",
+    Experience_Name:"Adventure",
+    Short_Description:"Add active experiences and landscapes to your African journey.",
+    Best_For:"Adventure",
+    Country:"Kenya,Tanzania",
+    Image_URL:"https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1000&q=85"
+  }
+
+];
+
+
+/* ---------------------------------------------------------
+   HELPERS
+   --------------------------------------------------------- */
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(
+      /[&<>'"]/g,
+      function(m){
+
+        return {
+
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          "'":"&#39;",
+          '"':"&quot;"
+
+        }[m];
+
+      }
+    );
+
+}
+
+
+function splitList(value){
+
+  return String(value || "")
+    .split(/[;,|]/)
+    .map(function(x){
+
+      return x.trim();
+
+    })
+    .filter(Boolean);
+
+}
+
+
+function getImage(item,index){
+
+  if(
+    item &&
+    item.Image_URL
+  ){
+
+    return item.Image_URL;
+
+  }
+
+  if(
+    item &&
+    item.imageUrl
+  ){
+
+    return item.imageUrl;
+
+  }
+
+  const image =
+    PLANNER_DATA.Images.find(
+      function(x){
+
+        return (
+
+          String(
+            x.Destination_ID || ""
+          ) ===
+          String(
+            item?.Destination_ID || ""
+          )
+
+          ||
+
+          String(
+            x.Experience_ID || ""
+          ) ===
+          String(
+            item?.Experience_ID || ""
+          )
+
+        );
+
+      }
+    );
+
+  if(
+    image &&
+    image.Image_URL
+  ){
+
+    return image.Image_URL;
+
+  }
+
+  const fallbacks = [
+
+    "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=85",
+
+    "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1000&q=85",
+
+    "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1000&q=85",
+
+    "https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1000&q=85"
+
+  ];
+
+  return fallbacks[
+    Math.abs(index || 0) %
+    fallbacks.length
+  ];
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+   --------------------------------------------------------- */
+
+function showToast(message){
+
+  const el =
+    document.getElementById(
+      "toast"
+    );
+
+  el.textContent =
+    message;
+
+  el.classList.add("show");
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(
+      function(){
+
+        el.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   LOADING
+   --------------------------------------------------------- */
+
+function setLoading(show){
+
+  const el =
+    document.getElementById(
+      "loadingOverlay"
+    );
+
+  if(show){
+
+    el.classList.add(
+      "show"
+    );
+
+    document.body.classList.add(
+      "locked"
+    );
+
+  }else{
+
+    el.classList.remove(
+      "show"
+    );
+
+    document.body.classList.remove(
+      "locked"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DATA LOADING
+   ========================================================= */
+
+async function loadPlannerData(){
+
+  /*
+    First preference:
+    existing data.js loader.
+  */
+
+  try{
+
+    if(
+      typeof SunSoilData !==
+      "undefined" &&
+      typeof SunSoilData.loadAll ===
+      "function"
+    ){
+
+      const data =
+        await SunSoilData.loadAll();
+
+      if(data){
+
+        PLANNER_DATA = {
+
+          ...PLANNER_DATA,
+          ...data
+
+        };
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Existing data loader failed:",
+      error
+    );
+
+  }
+
+
+  /*
+    Normalise data.
+  */
+
+  if(
+    !Array.isArray(
+      PLANNER_DATA.Destinations
+    ) ||
+    !PLANNER_DATA.Destinations.length
+  ){
+
+    PLANNER_DATA.Destinations =
+      FALLBACK_DESTINATIONS;
+
+  }
+
+
+  if(
+    !Array.isArray(
+      PLANNER_DATA.Experiences
+    ) ||
+    !PLANNER_DATA.Experiences.length
+  ){
+
+    PLANNER_DATA.Experiences =
+      FALLBACK_EXPERIENCES;
+
+  }
+
+
+  if(
+    !Array.isArray(
+      PLANNER_DATA.Seasons
+    )
+  ){
+
+    PLANNER_DATA.Seasons = [];
+
+  }
+
+
+  if(
+    !Array.isArray(
+      PLANNER_DATA.Images
+    )
+  ){
+
+    PLANNER_DATA.Images = [];
+
+  }
+
+
+  /*
+    URL parameters from Explore.
+  */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const country =
+    params.get("country");
+
+  const destination =
+    params.get("destination");
+
+  const month =
+    params.get("month");
+
+  const experience =
+    params.get("experience");
+
+
+  if(country){
+
+    selectCountry(
+      country
+    );
+
+  }
+
+
+  renderDestinations();
+
+  renderExperiences();
+
+  renderMonths();
+
+
+  if(destination){
+
+    const found =
+      PLANNER_DATA.Destinations.find(
+        function(x){
+
+          return (
+
+            String(
+              x.Destination_ID || ""
+            ) === destination
+
+            ||
+
+            String(
+              x.Destination_Name || ""
+            ) === destination
+
+          );
+
+        }
+      );
+
+    if(found){
+
+      state.country =
+        found.Country || "";
+
+      selectCountry(
+        state.country
+      );
+
+      toggleDestination(
+        found.Destination_ID ||
+        found.Destination_Name
+      );
+
+    }
+
+  }
+
+
+  if(month){
+
+    state.month =
+      month;
+
+    document
+      .querySelectorAll(
+        ".month-card"
+      )
+      .forEach(
+        function(card){
+
+          card.classList.toggle(
+            "selected",
+            card.dataset.month ===
+            month
+          );
+
+        }
+      );
+
+  }
+
+
+  if(experience){
+
+    const foundExperience =
+      PLANNER_DATA.Experiences.find(
+        function(x){
+
+          return (
+
+            String(
+              x.Experience_ID || ""
+            ) === experience
+
+            ||
+
+            String(
+              x.Experience_Name || ""
+            ) === experience
+
+          );
+
+        }
+      );
+
+    if(foundExperience){
+
+      toggleExperience(
+        foundExperience.Experience_ID ||
+        foundExperience.Experience_Name
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   COUNTRY
+   ========================================================= */
+
+function selectCountry(country){
+
+  state.country =
+    country;
+
+  document
+    .querySelectorAll(
+      ".choice-card"
+    )
+    .forEach(
+      function(card){
+
+        card.classList.toggle(
+          "selected",
+          card.dataset.country ===
+          country
+        );
+
+      }
+    );
+
+  renderDestinations();
+
+}
+
+
+/* =========================================================
+   DESTINATIONS
+   ========================================================= */
+
+function renderDestinations(){
+
+  const container =
+    document.getElementById(
+      "plannerDestinations"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  let destinations =
+    PLANNER_DATA.Destinations;
+
+
+  if(state.country){
+
+    destinations =
+      destinations.filter(
+        function(x){
+
+          return String(
+            x.Country || ""
+          )
+          .toLowerCase()
+          .includes(
+            state.country.toLowerCase()
+          );
+
+        }
+      );
+
+  }
+
+
+  /*
+    Keep the first useful destinations
+    visible. User can select multiple.
+  */
+
+  if(!destinations.length){
+
+    container.innerHTML =
+      `
+      <div
+        style="
+          grid-column:1/-1;
+          padding:40px;
+          text-align:center;
+          color:#777;
+        ">
+
+        No destinations are currently
+        available for this selection.
+
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    destinations
+      .map(
+        function(x,index){
+
+          const id =
+            x.Destination_ID ||
+            x.Destination_Name ||
+            ("destination-" + index);
+
+          const selected =
+            state.destinations.some(
+              function(d){
+
+                return d.id === id;
+
+              }
+            );
+
+          return `
+
+            <article
+              class="destination-choice ${selected ? "selected" : ""}"
+              data-destination-id="${esc(id)}"
+              onclick="toggleDestination('${esc(id).replace(/'/g,"\\'")}')">
+
+              <img
+                src="${esc(
+                  getImage(
+                    x,
+                    index
+                  )
+                )}"
+                alt="${esc(
+                  x.Destination_Name ||
+                  "Safari destination"
+                )}">
+
+              <span class="destination-selected">
+
+                ${selected ? "✓" : "+"}
+
+              </span>
+
+              <div class="destination-info">
+
+                <small>
+
+                  ${esc(
+                    x.Country ||
+                    ""
+                  )}
+
+                  ·
+
+                  ${esc(
+                    x.Region ||
+                    "Safari"
+                  )}
+
+                </small>
+
+                <h3>
+
+                  ${esc(
+                    x.Destination_Name ||
+                    "Destination"
+                  )}
+
+                </h3>
+
+                <p>
+
+                  ${esc(
+                    x.Short_Description ||
+                    ""
+                  )}
+
+                </p>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+function toggleDestination(id){
+
+  const item =
+    PLANNER_DATA.Destinations.find(
+      function(x){
+
+        return String(
+          x.Destination_ID ||
+          x.Destination_Name
+        ) === String(id);
+
+      }
+    );
+
+  if(!item){
+    return;
+  }
+
+
+  const existingIndex =
+    state.destinations.findIndex(
+      function(x){
+
+        return x.id ===
+          String(
+            item.Destination_ID ||
+            item.Destination_Name
+          );
+
+      }
+    );
+
+
+  if(existingIndex >= 0){
+
+    state.destinations.splice(
+      existingIndex,
+      1
+    );
+
+  }else{
+
+    state.destinations.push({
+
+      id:String(
+        item.Destination_ID ||
+        item.Destination_Name
+      ),
+
+      name:
+        item.Destination_Name ||
+        item.name,
+
+      country:
+        item.Country ||
+        item.country,
+
+      lat:Number(
+        item.Map_Lat ||
+        item.latitude ||
+        item.lat ||
+        0
+      ),
+
+      lng:Number(
+        item.Map_Lng ||
+        item.longitude ||
+        item.lng ||
+        0
+      ),
+
+      days:Number(
+        item.Suggested_Days ||
+        item.suggestedDays ||
+        1
+      )
+
+    });
+
+  }
+
+
+  renderDestinations();
+
+}
+
+
+/* =========================================================
+   TRAVELLERS
+   ========================================================= */
+
+function selectAdults(number){
+
+  state.adults =
+    number;
+
+  document
+    .querySelectorAll(
+      "[data-adults]"
+    )
+    .forEach(
+      function(card){
+
+        card.classList.toggle(
+          "selected",
+          Number(
+            card.dataset.adults
+          ) === number
+        );
+
+      }
+    );
+
+}
+
+
+function selectDays(number){
+
+  state.days =
+    number;
+
+  document
+    .querySelectorAll(
+      "[data-days]"
+    )
+    .forEach(
+      function(card){
+
+        card.classList.toggle(
+          "selected",
+          Number(
+            card.dataset.days
+          ) === number
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   MONTHS
+   ========================================================= */
+
+const MONTH_NAMES = [
+
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+
+];
+
+
+function renderMonths(){
+
+  const container =
+    document.getElementById(
+      "monthGrid"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML =
+    MONTH_NAMES
+      .map(
+        function(month,index){
+
+          const season =
+            findSeason(
+              month
+            );
+
+          return `
+
+            <button
+              type="button"
+              class="month-card ${
+                state.month === month
+                  ? "selected"
+                  : ""
+              }"
+              data-month="${esc(month)}"
+              onclick="selectMonth('${month}')">
+
+              <div class="month-name">
+
+                ${month.slice(0,3)}
+
+              </div>
+
+              <div class="month-season">
+
+                ${
+                  season
+                    ? esc(
+                        season.Season_Name ||
+                        season.Headline ||
+                        "Safari season"
+                      )
+                    : "Explore the season"
+
+                }
+
+              </div>
+
+            </button>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+function findSeason(month){
+
+  if(
+    !Array.isArray(
+      PLANNER_DATA.Seasons
+    )
+  ){
+
+    return null;
+
+  }
+
+
+  const lower =
+    month.toLowerCase();
+
+
+  return (
+    PLANNER_DATA.Seasons.find(
+      function(x){
+
+        const combined = [
+
+          x.Season_Name,
+          x.Headline,
+          x.Planner_Message,
+          x.What_You_May_Experience
+
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return combined.includes(
+          lower
+        );
+
+      }
+    )
+
+    ||
+
+    PLANNER_DATA.Seasons[0]
+
+    ||
+
+    null
+
+  );
+
+}
+
+
+function selectMonth(month){
+
+  state.month =
+    month;
+
+  renderMonths();
+
+}
+
+
+/* =========================================================
+   EXPERIENCES
+   ========================================================= */
+
+function renderExperiences(){
+
+  const container =
+    document.getElementById(
+      "plannerExperiences"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML =
+    PLANNER_DATA.Experiences
+      .slice(
+        0,
+        12
+      )
+      .map(
+        function(x,index){
+
+          const id =
+            x.Experience_ID ||
+            x.Experience_Name ||
+            ("experience-" + index);
+
+          const selected =
+            state.experiences.some(
+              function(e){
+
+                return e.id === id;
+
+              }
+            );
+
+
+          return `
+
+            <article
+              class="experience-choice ${
+                selected
+                  ? "selected"
+                  : ""
+              }"
+              onclick="toggleExperience('${esc(id).replace(/'/g,"\\'")}')">
+
+              <img
+                src="${esc(
+                  getImage(
+                    x,
+                    index
+                  )
+                )}"
+                alt="${esc(
+                  x.Experience_Name ||
+                  "Safari experience"
+                )}"
+                loading="lazy">
+
+              <span class="exp-check">
+
+                ${selected ? "✓" : "+"}
+
+              </span>
+
+              <div class="experience-copy">
+
+                <small>
+
+                  ${esc(
+                    x.Category ||
+                    "Experience"
+                  )}
+
+                </small>
+
+                <h3>
+
+                  ${esc(
+                    x.Experience_Name ||
+                    "Experience"
+                  )}
+
+                </h3>
+
+                <p>
+
+                  ${esc(
+                    x.Short_Description ||
+                    x.Best_For ||
+                    ""
+                  )}
+
+                </p>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+function toggleExperience(id){
+
+  const item =
+    PLANNER_DATA.Experiences.find(
+      function(x){
+
+        return String(
+          x.Experience_ID ||
+          x.Experience_Name
+        ) === String(id);
+
+      }
+    );
+
+  if(!item){
+    return;
+  }
+
+
+  const index =
+    state.experiences.findIndex(
+      function(x){
+
+        return x.id ===
+          String(
+            item.Experience_ID ||
+            item.Experience_Name
+          );
+
+      }
+    );
+
+
+  if(index >= 0){
+
+    state.experiences.splice(
+      index,
+      1
+    );
+
+  }else{
+
+    state.experiences.push({
+
+      id:String(
+        item.Experience_ID ||
+        item.Experience_Name
+      ),
+
+      name:
+        item.Experience_Name ||
+        item.name,
+
+      category:
+        item.Category ||
+        item.category,
+
+      country:
+        item.Country ||
+        item.country
+
+    });
+
+  }
+
+
+  renderExperiences();
+
+}
+
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+function validateStep(step){
+
+  if(step === 1){
+
+    if(!state.country){
+
+      showToast(
+        "Choose Kenya or Tanzania to continue."
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step === 2){
+
+    if(
+      !state.destinations.length
+    ){
+
+      showToast(
+        "Choose at least one destination."
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step === 3){
+
+    if(
+      !state.adults ||
+      !state.days
+    ){
+
+      showToast(
+        "Choose your travellers and safari duration."
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step === 4){
+
+    if(!state.month){
+
+      showToast(
+        "Choose your travel month."
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step === 5){
+
+    /*
+      Experiences are optional.
+      We intentionally allow the user to continue.
+    */
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   STEP NAVIGATION
+   ========================================================= */
+
+function nextStep(){
+
+  if(
+    !validateStep(
+      state.step
+    )
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    state.step >= 7
+  ){
+
+    return;
+
+  }
+
+
+  state.step += 1;
+
+
+  showStep(
+    state.step
+  );
+
+
+  if(
+    state.step === 6
+  ){
+
+    buildRoute();
+
+  }
+
+
+  if(
+    state.step === 7
+  ){
+
+    buildSummary();
+
+  }
+
+
+  window.scrollTo({
+
+    top:
+      document.querySelector(
+        ".builder"
+      ).offsetTop - 15,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+function prevStep(){
+
+  if(
+    state.step <= 1
+  ){
+
+    return;
+
+  }
+
+
+  state.step -= 1;
+
+  showStep(
+    state.step
+  );
+
+
+  window.scrollTo({
+
+    top:
+      document.querySelector(
+        ".builder"
+      ).offsetTop - 15,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+function showStep(step){
+
+  state.step =
+    step;
+
+
+  document
+    .querySelectorAll(
+      ".step"
+    )
+    .forEach(
+      function(section){
+
+        section.classList.toggle(
+          "active",
+          Number(
+            section.dataset.step
+          ) === step
+        );
+
+      }
+    );
+
+
+  document.getElementById(
+    "progressNumber"
+  ).textContent =
+    step;
+
+
+  document
+    .querySelectorAll(
+      ".progress-line span"
+    )
+    .forEach(
+      function(span,index){
+
+        span.style.width =
+          index < step
+            ? "100%"
+            : "0";
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   ROUTE BUILDING
+   ========================================================= */
+
+function buildRoute(){
+
+  let route =
+    state.destinations.slice();
+
+
+  /*
+    If only one destination was selected,
+    use nearby destinations to create a
+    useful preview.
+
+    The final recommendation comes from
+    the backend.
+  */
+
+  if(
+    route.length === 1
+  ){
+
+    const origin =
+      route[0];
+
+
+    const extras =
+      PLANNER_DATA.Destinations
+        .filter(
+          function(x){
+
+            const id =
+              String(
+                x.Destination_ID ||
+                x.Destination_Name
+              );
+
+            return (
+
+              id !== origin.id
+
+              &&
+
+              (
+                !state.country
+
+                ||
+
+                String(
+                  x.Country || ""
+                )
+                .toLowerCase()
+                .includes(
+                  state.country.toLowerCase()
+                )
+
+              )
+
+            );
+
+          }
+        )
+        .slice(
+          0,
+          2
+        )
+        .map(
+          function(x){
+
+            return {
+
+              id:String(
+                x.Destination_ID ||
+                x.Destination_Name
+              ),
+
+              name:
+                x.Destination_Name,
+
+              country:
+                x.Country,
+
+              lat:Number(
+                x.Map_Lat ||
+                x.latitude ||
+                x.lat ||
+                0
+              ),
+
+              lng:Number(
+                x.Map_Lng ||
+                x.longitude ||
+                x.lng ||
+                0
+              ),
+
+              days:Number(
+                x.Suggested_Days ||
+                1
+              )
+
+            };
+
+          }
+        );
+
+
+    route =
+      route.concat(
+        extras
+      );
+
+  }
+
+
+  route =
+    route.filter(
+      function(x){
+
+        return (
+          Number.isFinite(x.lat) &&
+          Number.isFinite(x.lng) &&
+          x.lat !== 0 &&
+          x.lng !== 0
+        );
+
+      }
+    );
+
+
+  /*
+    Trim route according to duration.
+  */
+
+  const maxStops =
+    state.days <= 4
+      ? 3
+      : state.days <= 6
+        ? 4
+        : 5;
+
+
+  route =
+    route.slice(
+      0,
+      maxStops
+    );
+
+
+  renderRouteTimeline(
+    route
+  );
+
+  initMap(
+    route
+  );
+
+}
+
+
+function renderRouteTimeline(route){
+
+  const container =
+    document.getElementById(
+      "routeTimeline"
+    );
+
+
+  if(!route.length){
+
+    container.innerHTML =
+      `
+      <div
+        style="
+          padding:20px;
+          background:#f3efe6;
+          border-radius:15px;
+          font-size:9px;
+          color:#737a74;
+        ">
+
+        Select destinations with
+        map coordinates to see
+        the route preview.
+
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  const totalDays =
+    Math.max(
+      state.days,
+      route.length
+    );
+
+
+  container.innerHTML =
+    route
+      .map(
+        function(stop,index){
+
+          const allocated =
+            Math.max(
+              1,
+              Math.round(
+                totalDays /
+                route.length
+              )
+            );
+
+
+          return `
+
+            <div
+              class="route-stop ${
+                index === 0
+                  ? "active"
+                  : ""
+              }">
+
+              <span class="route-dot"></span>
+
+              <strong>
+
+                ${esc(
+                  stop.name
+                )}
+
+              </strong>
+
+              <span>
+
+                ${esc(
+                  stop.country ||
+                  ""
+                )}
+
+              </span>
+
+              <span class="route-day">
+
+                Day ${
+                  index *
+                  allocated +
+                  1
+                }
+
+                ·
+
+                ${allocated}
+                day${allocated > 1 ? "s" : ""}
+
+              </span>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  document.getElementById(
+    "routeDescription"
+  ).textContent =
+
+    route.length === 1
+
+      ?
+
+        `Your safari starts in ${route[0].name}. Our team can refine the surrounding route around your travel month and interests.`
+
+      :
+
+        `Your ${state.days}-day journey connects ${route.map(function(x){return x.name;}).join(", ")}.`;
+
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+function initMap(route){
+
+  if(
+    typeof L ===
+    "undefined"
+  ){
+
+    document.getElementById(
+      "mapStatus"
+    ).textContent =
+      "Map library unavailable";
+
+    return;
+
+  }
+
+
+  setTimeout(
+    function(){
+
+      if(!safariMap){
+
+        safariMap =
+          L.map(
+            "safariMap",
+            {
+              zoomControl:true,
+              attributionControl:true
+            }
+          );
+
+        /*
+          Dark Carto tiles.
+          This gives the black-map look.
+        */
+
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+          {
+
+            maxZoom:19,
+
+            attribution:
+              '&copy; OpenStreetMap &copy; CARTO'
+
+          }
+        )
+        .addTo(
+          safariMap
+        );
+
+      }
+
+
+      routeMarkers.forEach(
+        function(marker){
+
+          safariMap.removeLayer(
+            marker
+          );
+
+        }
+      );
+
+      routeMarkers = [];
+
+
+      if(routeLine){
+
+        safariMap.removeLayer(
+          routeLine
+        );
+
+        routeLine =
+          null;
+
+      }
+
+
+      if(
+        !route.length
+      ){
+
+        safariMap.setView(
+          [
+            -2.5,
+            35.2
+          ],
+          5
+        );
+
+        return;
+
+      }
+
+
+      const coordinates =
+        route.map(
+          function(x){
+
+            return [
+              x.lat,
+              x.lng
+            ];
+
+          }
+        );
+
+
+      routeLine =
+        L.polyline(
+          coordinates,
+          {
+
+            color:"#c9a45d",
+
+            weight:4,
+
+            opacity:.92,
+
+            dashArray:"8 9",
+
+            lineCap:"round"
+
+          }
+        )
+        .addTo(
+          safariMap
+        );
+
+
+      route.forEach(
+        function(stop,index){
+
+          const icon =
+            L.divIcon({
+
+              className:"",
+
+              html:
+                '<div class="destination-marker ' +
+                (
+                  index === 0
+                    ? "start"
+                    : ""
+                ) +
+                '"></div>',
+
+              iconSize:[
+                18,
+                18
+              ],
+
+              iconAnchor:[
+                9,
+                9
+              ]
+
+            });
+
+
+          const marker =
+            L.marker(
+              [
+                stop.lat,
+                stop.lng
+              ],
+              {
+                icon:icon
+              }
+            )
+            .addTo(
+              safariMap
+            )
+            .bindTooltip(
+              stop.name,
+              {
+                direction:"top",
+                offset:[
+                  0,
+                  -7
+                ]
+              }
+            );
+
+
+          routeMarkers.push(
+            marker
+          );
+
+        }
+      );
+
+
+      safariMap.fitBounds(
+        routeLine.getBounds(),
+        {
+          padding:[
+            55,
+            55
+          ]
+        }
+      );
+
+
+      document.getElementById(
+        "mapStatus"
+      ).textContent =
+        route.length +
+        " stops · " +
+        state.days +
+        " days";
+
+
+      /*
+        Animate vehicle after
+        map has settled.
+      */
+
+      animateSafariVehicle(
+        coordinates
+      );
+
+      safariMap.invalidateSize();
+
+    },
+    150
+  );
+
+}
+
+
+/* =========================================================
+   SAFARI VEHICLE ANIMATION
+   ========================================================= */
+
+function animateSafariVehicle(
+  coordinates
+){
+
+  if(
+    !safariMap ||
+    !coordinates ||
+    coordinates.length < 2
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    safariVehicle
+  ){
+
+    safariMap.removeLayer(
+      safariVehicle
+    );
+
+  }
+
+
+  const vehicleIcon =
+    L.divIcon({
+
+      className:"",
+
+      html:
+        '<div class="safari-car">🚙</div>',
+
+      iconSize:[
+        38,
+        25
+      ],
+
+      iconAnchor:[
+        19,
+        12
+      ]
+
+    });
+
+
+  safariVehicle =
+    L.marker(
+      coordinates[0],
+      {
+        icon:
+          vehicleIcon,
+        zIndexOffset:1000
+      }
+    )
+    .addTo(
+      safariMap
+    );
+
+
+  let segment = 0;
+
+  let progress = 0;
+
+
+  function move(){
+
+    if(
+      segment >=
+      coordinates.length - 1
+    ){
+
+      return;
+
+    }
+
+
+    const start =
+      coordinates[
+        segment
+      ];
+
+    const end =
+      coordinates[
+        segment + 1
+      ];
+
+
+    progress += .012;
+
+
+    if(progress >= 1){
+
+      progress = 0;
+
+      segment++;
+
+      if(
+        segment >=
+        coordinates.length - 1
+      ){
+
+        safariVehicle.setLatLng(
+          end
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    const lat =
+      start[0] +
+      (
+        end[0] -
+        start[0]
+      ) *
+      progress;
+
+
+    const lng =
+      start[1] +
+      (
+        end[1] -
+        start[1]
+      ) *
+      progress;
+
+
+    safariVehicle.setLatLng(
+      [
+        lat,
+        lng
+      ]
+    );
+
+
+    requestAnimationFrame(
+      move
+    );
+
+  }
+
+
+  requestAnimationFrame(
+    move
+  );
+
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+function buildSummary(){
+
+  document.getElementById(
+    "summaryCountry"
+  ).textContent =
+    state.country ||
+    "Kenya + Tanzania";
+
+
+  document.getElementById(
+    "summaryTravellers"
+  ).textContent =
+
+    state.adults +
+    " adult" +
+    (
+      state.adults === 1
+        ? ""
+        : "s"
+    );
+
+
+  document.getElementById(
+    "summaryDays"
+  ).textContent =
+
+    state.days +
+    " days";
+
+
+  document.getElementById(
+    "summaryMonth"
+  ).textContent =
+
+    state.month ||
+    "Flexible";
+
+
+  document.getElementById(
+    "summaryDestinations"
+  ).innerHTML =
+
+    state.destinations.length
+
+      ?
+
+        state.destinations
+          .map(
+            function(x){
+
+              return `
+                <span class="selected-tag">
+                  ${esc(x.name)}
+                </span>
+              `;
+
+            }
+          )
+          .join("")
+
+      :
+
+        `<span class="selected-tag">
+          Not selected
+        </span>`;
+
+
+  document.getElementById(
+    "summaryExperiences"
+  ).innerHTML =
+
+    state.experiences.length
+
+      ?
+
+        state.experiences
+          .map(
+            function(x){
+
+              return `
+                <span class="selected-tag">
+                  ${esc(x.name)}
+                </span>
+              `;
+
+            }
+          )
+          .join("")
+
+      :
+
+        `<span
+          class="selected-tag"
+          style="
+            background:#eeeae0;
+            color:#667168;
+          ">
+
+          Flexible
+
+        </span>`;
+
+}
+
+
+/* =========================================================
+   FORM SUBMISSION
+   ========================================================= */
+
+function collectForm(){
+
+  state.name =
+    document.getElementById(
+      "name"
+    ).value.trim();
+
+  state.mobile =
+    document.getElementById(
+      "mobile"
+    ).value.trim();
+
+  state.email =
+    document.getElementById(
+      "email"
+    ).value.trim();
+
+  state.nationality =
+    document.getElementById(
+      "nationality"
+    ).value.trim();
+
+  state.occasion =
+    document.getElementById(
+      "occasion"
+    ).value.trim();
+
+  state.dietary =
+    document.getElementById(
+      "dietary"
+    ).value.trim();
+
+  state.notes =
+    document.getElementById(
+      "notes"
+    ).value.trim();
+
+}
+
+
+/* ---------------------------------------------------------
+   EMAIL VALIDATION
+   --------------------------------------------------------- */
+
+function validEmail(email){
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(
+      email
+    );
+
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+async function submitSafari(event){
+
+  event.preventDefault();
+
+  collectForm();
+
+
+  if(
+    !state.mobile
+  ){
+
+    showToast(
+      "Please enter your mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !state.email ||
+    !validEmail(
+      state.email
+    )
+  ){
+
+    showToast(
+      "Please enter a valid email address."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Final payload.
+
+    Names intentionally match the
+    existing Apps Script backend
+    architecture.
+  */
+
+  const payload = {
+
+    country:
+      state.country,
+
+    countryChoice:
+      state.country,
+
+    travelMonth:
+      state.month,
+
+    travelDate:
+      state.travelDate,
+
+    adults:
+      state.adults,
+
+    children:
+      state.children,
+
+    durationDays:
+      state.days,
+
+    travelStyle:
+      state.travelStyle,
+
+    selectedDestinations:
+      state.destinations.map(
+        function(x){
+
+          return x.name;
+
+        }
+      ),
+
+    selectedDestinationIds:
+      state.destinations.map(
+        function(x){
+
+          return x.id;
+
+        }
+      ),
+
+    selectedExperiences:
+      state.experiences.map(
+        function(x){
+
+          return x.name;
+
+        }
+      ),
+
+    selectedExperienceNames:
+      state.experiences.map(
+        function(x){
+
+          return x.name;
+
+        }
+      ),
+
+    name:
+      state.name,
+
+    mobile:
+      state.mobile,
+
+    email:
+      state.email,
+
+    nationality:
+      state.nationality,
+
+    specialOccasion:
+      state.occasion,
+
+    dietaryRequirement:
+      state.dietary,
+
+    notes:
+      state.notes,
+
+    source:
+      "Safari Planner Website",
+
+    page:
+      "planner.html"
+
+  };
+
+
+  setLoading(
+    true
+  );
+
+
+  try{
+
+    const response =
+      await sendToBackend(
+        payload
+      );
+
+
+    if(
+      !response ||
+      response.success === false
+    ){
+
+      throw new Error(
+        response?.message ||
+        "The safari request could not be submitted."
+      );
+
+    }
+
+
+    /*
+      Save result locally so
+      success.html can display it.
+    */
+
+    try{
+
+      sessionStorage.setItem(
+        "sunsoilSafariResult",
+        JSON.stringify(
+          response
+        )
+      );
+
+      sessionStorage.setItem(
+        "sunsoilSafariPayload",
+        JSON.stringify(
+          payload
+        )
+      );
+
+    }catch(storageError){
+
+      console.warn(
+        "Session storage unavailable:",
+        storageError
+      );
+
+    }
+
+
+    /*
+      Navigate to success page.
+    */
+
+    window.location.href =
+      "success.html";
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    setLoading(
+      false
+    );
+
+    showToast(
+      error.message ||
+      "Something went wrong while submitting your safari."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BACKEND BRIDGE
+   ========================================================= */
+
+async function sendToBackend(
+  payload
+){
+
+  /*
+    OPTION 1:
+    Google Apps Script native environment.
+
+    If this HTML is eventually served
+    from Apps Script, use google.script.run.
+  */
+
+  if(
+    typeof google !== "undefined" &&
+    google.script &&
+    google.script.run
+  ){
+
+    return new Promise(
+      function(resolve,reject){
+
+        google.script.run
+
+          .withSuccessHandler(
+            function(result){
+
+              resolve(
+                result
+              );
+
+            }
+          )
+
+          .withFailureHandler(
+            function(error){
+
+              reject(
+                new Error(
+                  error?.message ||
+                  "Apps Script submission failed."
+                )
+              );
+
+            }
+          )
+
+          .submitTripRequest(
+            payload
+          );
+
+      }
+    );
+
+  }
+
+
+  /*
+    OPTION 2:
+    Static website.
+
+    The URL comes from config.js.
+
+    Example:
+
+    const SUNSOIL_CONFIG = {
+      WRITE_API_URL:
+        "https://script.google.com/..."
+    };
+  */
+
+  let apiUrl = "";
+
+
+  if(
+    typeof SUNSOIL_CONFIG !==
+    "undefined"
+  ){
+
+    apiUrl =
+      SUNSOIL_CONFIG.WRITE_API_URL ||
+      SUNSOIL_CONFIG.API_URL ||
+      "";
+
+  }
+
+
+  if(
+    !apiUrl &&
+    typeof APP_CONFIG !==
+    "undefined"
+  ){
+
+    apiUrl =
+      APP_CONFIG.WRITE_API_URL ||
+      APP_CONFIG.API_URL ||
+      "";
+
+  }
+
+
+  if(!apiUrl){
+
+    /*
+      This is a local-development
+      safety fallback.
+
+      It prevents the page from
+      silently pretending that the
+      request was submitted.
+    */
+
+    throw new Error(
+      "No Apps Script API URL is configured. Add WRITE_API_URL in assets/js/config.js."
+    );
+
+  }
+
+
+  const response =
+    await fetch(
+      apiUrl,
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify(
+            {
+              action:
+                "submitTripRequest",
+
+              data:
+                payload
+
+            }
+          )
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let result;
+
+
+  try{
+
+    result =
+      JSON.parse(
+        text
+      );
+
+  }catch(error){
+
+    /*
+      Apps Script can sometimes
+      return HTML/redirect content
+      when deployment settings are
+      incorrect.
+    */
+
+    throw new Error(
+      "The Apps Script API did not return JSON. Check that the Web App is deployed as 'Anyone' and that the API URL in config.js is correct."
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+async function initPlanner(){
+
+  document.getElementById(
+    "footerYear"
+  ).textContent =
+    new Date()
+      .getFullYear();
+
+
+  /*
+    Sensible initial defaults.
+  */
+
+  selectAdults(
+    2
+  );
+
+  selectDays(
+    6
+  );
+
+
+  await loadPlannerData();
+
+
+  /*
+    If the URL gave us a
+    country/destination, keep it.
+    Otherwise show both countries.
+  */
+
+  if(!state.country){
+
+    document
+      .querySelectorAll(
+        ".choice-card"
+      )
+      .forEach(
+        function(card){
+
+          card.classList.remove(
+            "selected"
+          );
+
+        }
+      );
+
+  }
+
+
+  /*
+    Keep map container healthy
+    when returning from another
+    step.
+  */
+
+}
+
+
+/* START APPLICATION */
+
+initPlanner();
+
+</script>
+
+</body>
+</html>

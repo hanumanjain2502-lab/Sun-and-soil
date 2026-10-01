@@ -1,0 +1,22 @@
+SUN & SOIL — START HERE
+
+1. Open assets/js/config.js
+2. Paste your Google Sheet URL into GOOGLE_SHEET_URL.
+3. Create the write gateway using google-apps-script/Code.gs in the same Google Sheet.
+4. Deploy that script as a Web App (execute as you, access anyone).
+5. Paste the /exec URL into WRITE_API_URL.
+6. Host the whole folder on GitHub Pages / Netlify / Vercel.
+7. Use the hosted index.html URL for your QR.
+
+You do NOT need to put the spreadsheet URL into every page.
+Only edit config.js once.
+
+The workbook architecture you supplied is included unchanged as:
+Sun_and_Soil_Africa_Safari_Planner.xlsx
+
+The website reads content from the same sheet names:
+Config, Destinations, Seasons, Experiences, Routes, Packages,
+Trip_Requests, Recommendation_Rules, Images, Analytics_Events,
+Email_Templates, README.
+
+Public rates are not rendered.

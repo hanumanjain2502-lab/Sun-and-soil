@@ -1,0 +1,2703 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="theme-color"
+  content="#07110b">
+
+<meta
+  name="description"
+  content="Your personalised safari journey with Sun & Soil Destinations.">
+
+<title>Your Safari Plan | Sun & Soil</title>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com">
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
+
+<link
+  rel="stylesheet"
+  href="assets/css/styles.css">
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+
+
+<style>
+
+/* =========================================================
+   SUN & SOIL — SUCCESS / SAFARI PLAN
+   ========================================================= */
+
+:root{
+
+  --forest:#07110b;
+  --forest2:#0c1d13;
+  --forest3:#15301f;
+
+  --gold:#c9a45d;
+  --gold2:#e0c27e;
+
+  --ivory:#f7f4ec;
+  --cream:#eee9dc;
+  --white:#ffffff;
+
+  --ink:#142018;
+  --muted:#737b74;
+
+  --line:rgba(17,34,23,.10);
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Manrope",Arial,sans-serif;
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  margin:0;
+
+  background:#e7e3d9;
+
+  color:var(--ink);
+
+  font-family:var(--sans);
+
+  overflow-x:hidden;
+
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app{
+
+  width:min(1440px,calc(100% - 28px));
+
+  margin:14px auto 28px;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  background:var(--ivory);
+
+  box-shadow:
+    0 30px 100px rgba(8,25,15,.16);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav{
+
+  height:78px;
+
+  padding:0 32px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  position:relative;
+
+  z-index:50;
+
+  background:rgba(247,244,236,.90);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(0,0,0,.05);
+
+}
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+.logo{
+
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  position:relative;
+
+  background:var(--forest);
+
+}
+
+.logo:before{
+
+  content:"";
+
+  position:absolute;
+
+  width:44px;
+  height:13px;
+
+  left:-3px;
+  top:11px;
+
+  border:2px solid var(--gold);
+
+  border-radius:50%;
+
+  transform:rotate(-12deg);
+
+}
+
+.logo:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:9px;
+  height:9px;
+
+  left:14px;
+  top:14px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+}
+
+.brand-name{
+
+  display:block;
+
+  font-size:13px;
+
+  letter-spacing:.12em;
+
+  font-weight:800;
+
+}
+
+.brand-tag{
+
+  display:block;
+
+  margin-top:2px;
+
+  font-size:7px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  color:#858c85;
+
+}
+
+.nav-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+.nav-link{
+
+  padding:11px 16px;
+
+  border-radius:999px;
+
+  font-size:9px;
+
+  font-weight:800;
+
+}
+
+.nav-link:hover{
+
+  background:#ebe7dc;
+
+}
+
+.nav-cta{
+
+  padding:12px 17px;
+
+  border-radius:999px;
+
+  background:var(--forest);
+
+  color:#fff;
+
+  font-size:9px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.success-hero{
+
+  min-height:620px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(201,164,93,.18),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(54,112,70,.28),
+      transparent 32%
+    ),
+
+    linear-gradient(
+      135deg,
+      #050b07,
+      #0d2416
+    );
+
+  color:#fff;
+
+}
+
+.hero-image{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:.40;
+
+}
+
+.hero-image img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+.success-hero:after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(3,9,6,.98) 0%,
+      rgba(3,9,6,.83) 43%,
+      rgba(3,9,6,.25) 100%
+    );
+
+}
+
+.hero-content{
+
+  position:relative;
+
+  z-index:2;
+
+  min-height:620px;
+
+  max-width:900px;
+
+  padding:90px 52px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+}
+
+.success-icon{
+
+  width:58px;
+  height:58px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(201,164,93,.13);
+
+  border:1px solid rgba(224,194,126,.60);
+
+  color:var(--gold2);
+
+  font-size:23px;
+
+  margin-bottom:22px;
+
+  animation:
+    iconPop .7s cubic-bezier(.2,.8,.2,1) both;
+
+}
+
+@keyframes iconPop{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      scale(.5)
+      rotate(-20deg);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      scale(1)
+      rotate(0);
+
+  }
+
+}
+
+.hero-eyebrow{
+
+  font-size:9px;
+
+  letter-spacing:.26em;
+
+  text-transform:uppercase;
+
+  color:var(--gold2);
+
+  font-weight:900;
+
+}
+
+.hero-title{
+
+  margin:14px 0 20px;
+
+  font-family:var(--serif);
+
+  font-size:clamp(60px,7vw,105px);
+
+  line-height:.78;
+
+  letter-spacing:-.05em;
+
+  font-weight:600;
+
+}
+
+.hero-title em{
+
+  color:var(--gold2);
+
+  font-style:italic;
+
+}
+
+.hero-text{
+
+  max-width:580px;
+
+  margin:0;
+
+  font-size:12px;
+
+  line-height:1.8;
+
+  color:rgba(255,255,255,.64);
+
+}
+
+.hero-actions{
+
+  display:flex;
+
+  gap:9px;
+
+  flex-wrap:wrap;
+
+  margin-top:28px;
+
+}
+
+.btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:9px;
+
+  padding:14px 21px;
+
+  border-radius:999px;
+
+  border:0;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  transition:.25s;
+
+}
+
+.btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+.btn-primary{
+
+  background:var(--gold);
+
+  color:#07110b;
+
+}
+
+.btn-secondary{
+
+  background:rgba(255,255,255,.09);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  color:#fff;
+
+  backdrop-filter:blur(12px);
+
+}
+
+
+/* =========================================================
+   FLOATING REFERENCE
+   ========================================================= */
+
+.reference-card{
+
+  position:absolute;
+
+  z-index:5;
+
+  right:38px;
+
+  bottom:35px;
+
+  width:240px;
+
+  padding:17px;
+
+  border-radius:19px;
+
+  background:rgba(4,12,8,.68);
+
+  border:1px solid rgba(255,255,255,.13);
+
+  backdrop-filter:blur(17px);
+
+  color:#fff;
+
+}
+
+.reference-card small{
+
+  display:block;
+
+  font-size:7px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.16em;
+
+  color:rgba(255,255,255,.45);
+
+}
+
+.reference-card strong{
+
+  display:block;
+
+  margin-top:5px;
+
+  font-family:var(--serif);
+
+  font-size:25px;
+
+  color:var(--gold2);
+
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main{
+
+  padding:65px 34px 90px;
+
+  background:
+
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(201,164,93,.10),
+      transparent 25%
+    ),
+
+    var(--ivory);
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header{
+
+  max-width:720px;
+
+  margin:0 auto 35px;
+
+  text-align:center;
+
+}
+
+.kicker{
+
+  font-size:8px;
+
+  letter-spacing:.22em;
+
+  text-transform:uppercase;
+
+  color:#94763c;
+
+  font-weight:900;
+
+}
+
+.section-header h2{
+
+  margin:9px 0 12px;
+
+  font-family:var(--serif);
+
+  font-size:clamp(45px,5vw,70px);
+
+  line-height:.86;
+
+  letter-spacing:-.04em;
+
+  font-weight:600;
+
+}
+
+.section-header p{
+
+  margin:0 auto;
+
+  max-width:580px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  line-height:1.7;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.summary{
+
+  max-width:1100px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr 1fr 1fr;
+
+  gap:10px;
+
+}
+
+.summary-card{
+
+  padding:20px;
+
+  min-height:115px;
+
+  background:#fff;
+
+  border-radius:19px;
+
+  box-shadow:
+    0 12px 35px rgba(16,32,23,.06);
+
+}
+
+.summary-card small{
+
+  display:block;
+
+  font-size:7px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.15em;
+
+  color:#8a918a;
+
+  font-weight:900;
+
+}
+
+.summary-card strong{
+
+  display:block;
+
+  margin-top:9px;
+
+  font-family:var(--serif);
+
+  font-size:29px;
+
+  line-height:.95;
+
+}
+
+
+/* =========================================================
+   PLAN CARD
+   ========================================================= */
+
+.plan-section{
+
+  max-width:1100px;
+
+  margin:50px auto 0;
+
+}
+
+.plan-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:28px;
+
+  background:var(--forest);
+
+  color:#fff;
+
+  box-shadow:
+    0 25px 65px rgba(8,25,15,.17);
+
+}
+
+.plan-card-top{
+
+  padding:29px 30px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.plan-card-top h3{
+
+  margin:0;
+
+  font-family:var(--serif);
+
+  font-size:40px;
+
+  line-height:.9;
+
+}
+
+.plan-card-top p{
+
+  margin:7px 0 0;
+
+  font-size:8px;
+
+  color:rgba(255,255,255,.47);
+
+}
+
+.plan-badge{
+
+  padding:8px 11px;
+
+  border-radius:999px;
+
+  background:rgba(201,164,93,.13);
+
+  border:1px solid rgba(201,164,93,.30);
+
+  color:var(--gold2);
+
+  font-size:7px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.13em;
+
+  font-weight:900;
+
+}
+
+.plan-content{
+
+  padding:30px;
+
+}
+
+.plan-content h4{
+
+  margin:0 0 12px;
+
+  font-family:var(--serif);
+
+  font-size:31px;
+
+}
+
+.plan-content p{
+
+  margin:0 0 17px;
+
+  color:rgba(255,255,255,.63);
+
+  font-size:10px;
+
+  line-height:1.75;
+
+}
+
+.plan-content ul{
+
+  margin:0;
+
+  padding:0;
+
+  list-style:none;
+
+}
+
+.plan-content li{
+
+  display:flex;
+
+  gap:10px;
+
+  padding:11px 0;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  color:rgba(255,255,255,.70);
+
+  font-size:9px;
+
+  line-height:1.55;
+
+}
+
+.plan-content li:last-child{
+
+  border-bottom:0;
+
+}
+
+.plan-content li:before{
+
+  content:"✦";
+
+  color:var(--gold2);
+
+  flex:none;
+
+}
+
+
+/* =========================================================
+   DESTINATION / EXPERIENCE TAGS
+   ========================================================= */
+
+.tags-section{
+
+  max-width:1100px;
+
+  margin:30px auto 0;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:15px;
+
+}
+
+.tags-card{
+
+  background:#fff;
+
+  border-radius:23px;
+
+  padding:24px;
+
+  box-shadow:
+    0 12px 38px rgba(16,32,23,.06);
+
+}
+
+.tags-card h3{
+
+  margin:0 0 16px;
+
+  font-family:var(--serif);
+
+  font-size:31px;
+
+}
+
+.tags{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+}
+
+.tag{
+
+  padding:8px 10px;
+
+  border-radius:999px;
+
+  background:#f0ece2;
+
+  color:#566158;
+
+  font-size:7px;
+
+  font-weight:800;
+
+}
+
+
+/* =========================================================
+   NEXT STEP CTA
+   ========================================================= */
+
+.next-section{
+
+  max-width:1100px;
+
+  margin:40px auto 0;
+
+}
+
+.next-card{
+
+  min-height:270px;
+
+  padding:38px;
+
+  border-radius:27px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(201,164,93,.25),
+      transparent 28%
+    ),
+
+    #10271a;
+
+  color:#fff;
+
+}
+
+.next-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  border-radius:50%;
+
+  right:-100px;
+  bottom:-130px;
+
+  border:1px solid rgba(201,164,93,.20);
+
+}
+
+.next-card h3{
+
+  margin:0;
+
+  font-family:var(--serif);
+
+  font-size:49px;
+
+  line-height:.85;
+
+  max-width:600px;
+
+}
+
+.next-card p{
+
+  max-width:550px;
+
+  color:rgba(255,255,255,.56);
+
+  font-size:10px;
+
+  line-height:1.7;
+
+  margin:13px 0 22px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+
+  padding:40px 34px;
+
+  background:#050d08;
+
+  color:#fff;
+
+  display:grid;
+
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+
+  gap:30px;
+
+}
+
+.footer h4{
+
+  margin:0 0 13px;
+
+  font-size:8px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.16em;
+
+  color:var(--gold2);
+
+}
+
+.footer a,
+.footer p{
+
+  display:block;
+
+  margin:7px 0;
+
+  color:rgba(255,255,255,.50);
+
+  font-size:9px;
+
+  line-height:1.7;
+
+}
+
+.footer-bottom{
+
+  grid-column:1/-1;
+
+  padding-top:17px;
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  display:flex;
+
+  justify-content:space-between;
+
+  color:rgba(255,255,255,.28);
+
+  font-size:8px;
+
+}
+
+
+/* =========================================================
+   CONFETTI / SUCCESS PARTICLES
+   ========================================================= */
+
+.particles{
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:3;
+
+}
+
+.particle{
+
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  opacity:0;
+
+  animation:
+    particleFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes particleFloat{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+      translateY(20px)
+      scale(.5);
+
+  }
+
+  20%{
+    opacity:.65;
+  }
+
+  80%{
+    opacity:.35;
+  }
+
+  100%{
+
+    opacity:0;
+
+    transform:
+      translateY(-100px)
+      scale(1.1);
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:900px){
+
+  .summary{
+
+    grid-template-columns:1fr 1fr;
+
+  }
+
+  .tags-section{
+
+    grid-template-columns:1fr;
+
+  }
+
+}
+
+@media(max-width:700px){
+
+  body{
+    background:var(--ivory);
+  }
+
+  .app{
+
+    width:100%;
+
+    margin:0;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+  }
+
+  .nav{
+
+    height:66px;
+
+    padding:0 16px;
+
+  }
+
+  .nav-link{
+
+    display:none;
+
+  }
+
+  .nav-cta{
+
+    padding:10px 13px;
+
+  }
+
+  .success-hero{
+
+    min-height:570px;
+
+  }
+
+  .hero-content{
+
+    min-height:570px;
+
+    padding:65px 22px;
+
+    justify-content:flex-end;
+
+  }
+
+  .hero-title{
+
+    font-size:60px;
+
+  }
+
+  .hero-text{
+
+    font-size:10px;
+
+  }
+
+  .reference-card{
+
+    left:20px;
+
+    right:20px;
+
+    bottom:20px;
+
+    width:auto;
+
+  }
+
+  .main{
+
+    padding:50px 16px 80px;
+
+  }
+
+  .summary{
+
+    grid-template-columns:1fr 1fr;
+
+  }
+
+  .summary-card{
+
+    min-height:105px;
+
+    padding:16px;
+
+  }
+
+  .summary-card strong{
+
+    font-size:25px;
+
+  }
+
+  .plan-card-top{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+  .plan-content{
+
+    padding:24px;
+
+  }
+
+  .plan-card-top{
+
+    padding:24px;
+
+  }
+
+  .next-card{
+
+    padding:28px;
+
+  }
+
+  .next-card h3{
+
+    font-size:43px;
+
+  }
+
+  .footer{
+
+    grid-template-columns:1fr 1fr;
+
+    padding:32px 20px;
+
+  }
+
+  .footer-bottom{
+
+    grid-column:1/-1;
+
+    display:block;
+
+    line-height:1.8;
+
+  }
+
+}
+
+@media(max-width:420px){
+
+  .summary{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .hero-title{
+
+    font-size:53px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     NAV
+     ===================================================== -->
+
+<header class="nav">
+
+
+  <a
+    href="index.html"
+    class="brand">
+
+    <span class="logo"></span>
+
+    <span>
+
+      <span class="brand-name">
+        SUN &amp; SOIL
+      </span>
+
+      <span class="brand-tag">
+        Destinations
+      </span>
+
+    </span>
+
+  </a>
+
+
+  <div class="nav-right">
+
+    <a
+      href="explore.html"
+      class="nav-link">
+
+      Explore Africa
+
+    </a>
+
+    <a
+      href="planner.html"
+      class="nav-link">
+
+      Build Again
+
+    </a>
+
+    <a
+      href="contact.html"
+      class="nav-cta">
+
+      Talk to an Expert
+      →
+
+    </a>
+
+  </div>
+
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="success-hero">
+
+
+  <div class="hero-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1800&q=88"
+      alt="African safari landscape">
+
+  </div>
+
+
+  <div class="particles">
+
+    <span
+      class="particle"
+      style="
+        left:12%;
+        top:70%;
+        animation-delay:.2s;
+      "></span>
+
+    <span
+      class="particle"
+      style="
+        left:25%;
+        top:65%;
+        animation-delay:1s;
+      "></span>
+
+    <span
+      class="particle"
+      style="
+        left:42%;
+        top:80%;
+        animation-delay:1.8s;
+      "></span>
+
+    <span
+      class="particle"
+      style="
+        left:62%;
+        top:75%;
+        animation-delay:.7s;
+      "></span>
+
+    <span
+      class="particle"
+      style="
+        left:77%;
+        top:70%;
+        animation-delay:2.2s;
+      "></span>
+
+    <span
+      class="particle"
+      style="
+        left:89%;
+        top:83%;
+        animation-delay:1.4s;
+      "></span>
+
+  </div>
+
+
+  <div class="hero-content">
+
+
+    <div class="success-icon">
+      ✓
+    </div>
+
+
+    <div class="hero-eyebrow">
+      Your safari journey has begun
+    </div>
+
+
+    <h1 class="hero-title">
+
+      You're one step<br>
+
+      closer to <em>Africa.</em>
+
+    </h1>
+
+
+    <p
+      class="hero-text"
+      id="heroMessage">
+
+      Thank you for trusting Sun &amp; Soil with your
+      journey. We've received your safari brief and our
+      team will shape it into a personalised Safari Plan.
+
+    </p>
+
+
+    <div class="hero-actions">
+
+      <a
+        href="contact.html"
+        class="btn btn-primary">
+
+        Talk to a Safari Expert
+        →
+
+      </a>
+
+
+      <a
+        href="planner.html"
+        class="btn btn-secondary">
+
+        Build Another Safari
+
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="reference-card">
+
+    <small>
+      Safari reference
+    </small>
+
+    <strong id="leadId">
+      Preparing…
+    </strong>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="main">
+
+
+  <div class="section-header">
+
+    <div class="kicker">
+      Your personalised safari brief
+    </div>
+
+    <h2>
+      Your journey,<br>
+      at a glance.
+    </h2>
+
+    <p>
+      These are the choices you shared with us.
+      They give our team the foundation to create
+      your personalised safari plan.
+    </p>
+
+  </div>
+
+
+  <!-- ===================================================
+       SUMMARY
+       =================================================== -->
+
+  <section class="summary">
+
+
+    <div class="summary-card">
+
+      <small>
+        Country
+      </small>
+
+      <strong id="summaryCountry">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <small>
+        Travel month
+      </small>
+
+      <strong id="summaryMonth">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <small>
+        Duration
+      </small>
+
+      <strong id="summaryDays">
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <small>
+        Travellers
+      </small>
+
+      <strong id="summaryTravellers">
+        —
+      </strong>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ===================================================
+       GENERATED PLAN
+       =================================================== -->
+
+  <section class="plan-section">
+
+
+    <div class="plan-card">
+
+
+      <div class="plan-card-top">
+
+        <div>
+
+          <h3>
+            Your Safari Plan
+          </h3>
+
+          <p>
+            A starting point shaped around your choices.
+          </p>
+
+        </div>
+
+
+        <span class="plan-badge">
+          Personalised
+        </span>
+
+      </div>
+
+
+      <div class="plan-content">
+
+
+        <h4 id="planTitle">
+          Your African journey awaits.
+        </h4>
+
+
+        <p id="planNarrative">
+
+          Our safari team will use your travel month,
+          destinations, duration and interests to
+          refine your journey.
+
+        </p>
+
+
+        <ul id="planHighlights">
+
+          <li>
+            Your selected destinations will guide the route.
+          </li>
+
+          <li>
+            Your selected experiences will shape the safari.
+          </li>
+
+          <li>
+            Our team will refine the journey around your dates.
+          </li>
+
+        </ul>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ===================================================
+       DESTINATIONS + EXPERIENCES
+       =================================================== -->
+
+  <section class="tags-section">
+
+
+    <div class="tags-card">
+
+      <h3>
+        Places you've chosen
+      </h3>
+
+      <div
+        class="tags"
+        id="destinationTags">
+
+      </div>
+
+    </div>
+
+
+    <div class="tags-card">
+
+      <h3>
+        Experiences you've chosen
+      </h3>
+
+      <div
+        class="tags"
+        id="experienceTags">
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ===================================================
+       NEXT STEP
+       =================================================== -->
+
+  <section class="next-section">
+
+
+    <div class="next-card">
+
+
+      <div class="kicker">
+        What happens next
+      </div>
+
+
+      <h3>
+        Now let Africa<br>
+        become <em>real.</em>
+      </h3>
+
+
+      <p>
+
+        Your enquiry is now with Sun &amp; Soil.
+        Our team can review your preferences,
+        refine the route and discuss the details
+        that make the journey yours.
+
+      </p>
+
+
+      <div
+        style="
+          display:flex;
+          gap:8px;
+          flex-wrap:wrap;
+        ">
+
+
+        <a
+          href="contact.html"
+          class="btn btn-primary">
+
+          Speak to our team
+          →
+
+        </a>
+
+
+        <a
+          href="explore.html"
+          class="btn btn-secondary">
+
+          Continue exploring
+
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+
+  <div>
+
+    <a
+      href="index.html"
+      class="brand">
+
+      <span class="logo"></span>
+
+      <span>
+
+        <span
+          class="brand-name"
+          style="color:#fff">
+
+          SUN &amp; SOIL
+
+        </span>
+
+        <span
+          class="brand-tag"
+          style="color:#89938b">
+
+          Destinations
+
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <p>
+      Crafting Soulful Journeys across Kenya,
+      Tanzania and beyond.
+    </p>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Explore
+    </h4>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="explore.html">
+      Destinations
+    </a>
+
+    <a href="planner.html">
+      Build Safari
+    </a>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Contact
+    </h4>
+
+    <a href="tel:+919637146111">
+      India · +91 9637146111
+    </a>
+
+    <a href="tel:+255657313330">
+      Tanzania · +255 657 313 330
+    </a>
+
+    <a href="mailto:info@sunandsoildestinations.com">
+      info@sunandsoildestinations.com
+    </a>
+
+  </div>
+
+
+  <div>
+
+    <h4>
+      Crafting Soulful Journeys
+    </h4>
+
+    <p>
+      Thoughtful routes, meaningful experiences
+      and journeys shaped around you.
+    </p>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      ©
+      <span id="footerYear"></span>
+      Sun &amp; Soil Destinations Pvt. Ltd.
+    </span>
+
+    <span>
+      Crafting Soulful Journeys
+    </span>
+
+  </div>
+
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SUCCESS PAGE DATA ENGINE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   HELPERS
+   --------------------------------------------------------- */
+
+function safe(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /[&<>'"]/g,
+    function(m){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        "'":"&#39;",
+        '"':"&quot;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+function firstValue(
+  object,
+  keys,
+  fallback
+){
+
+  for(
+    const key of keys
+  ){
+
+    if(
+      object &&
+      object[key] !== undefined &&
+      object[key] !== null &&
+      String(
+        object[key]
+      ).trim() !== ""
+    ){
+
+      return object[key];
+
+    }
+
+  }
+
+  return fallback;
+
+}
+
+
+function arrayValue(
+  value
+){
+
+  if(
+    Array.isArray(
+      value
+    )
+  ){
+
+    return value;
+
+  }
+
+  if(
+    !value
+  ){
+
+    return [];
+
+  }
+
+  return String(
+    value
+  )
+  .split(
+    /[,;|]/
+  )
+  .map(
+    function(x){
+
+      return x.trim();
+
+    }
+  )
+  .filter(Boolean);
+
+}
+
+
+/* =========================================================
+   READ STORED RESULT
+   ========================================================= */
+
+function getStoredData(){
+
+  let result = null;
+
+  let payload = null;
+
+
+  try{
+
+    result =
+      JSON.parse(
+        sessionStorage.getItem(
+          "sunsoilSafariResult"
+        ) || "null"
+      );
+
+  }catch(error){
+
+    console.warn(
+      "Could not read safari result:",
+      error
+    );
+
+  }
+
+
+  try{
+
+    payload =
+      JSON.parse(
+        sessionStorage.getItem(
+          "sunsoilSafariPayload"
+        ) || "null"
+      );
+
+  }catch(error){
+
+    console.warn(
+      "Could not read safari payload:",
+      error
+    );
+
+  }
+
+
+  return {
+
+    result:
+      result || {},
+
+    payload:
+      payload || {}
+
+  };
+
+}
+
+
+/* =========================================================
+   RENDER SUMMARY
+   ========================================================= */
+
+function renderSummary(
+  result,
+  payload
+){
+
+  const recommendation =
+    result.recommendation ||
+    result.plan ||
+    {};
+
+
+  const country =
+    firstValue(
+      payload,
+      [
+        "country",
+        "countryChoice"
+      ],
+      firstValue(
+        recommendation,
+        [
+          "country"
+        ],
+        "Kenya + Tanzania"
+      )
+    );
+
+
+  const month =
+    firstValue(
+      payload,
+      [
+        "travelMonth",
+        "month"
+      ],
+      "Flexible"
+    );
+
+
+  const days =
+    firstValue(
+      payload,
+      [
+        "durationDays",
+        "days"
+      ],
+      firstValue(
+        recommendation,
+        [
+          "durationDays",
+          "days"
+        ],
+        "Flexible"
+      )
+    );
+
+
+  const adults =
+    Number(
+      firstValue(
+        payload,
+        [
+          "adults"
+        ],
+        0
+      )
+    );
+
+
+  const children =
+    Number(
+      firstValue(
+        payload,
+        [
+          "children"
+        ],
+        0
+      )
+    );
+
+
+  let travellers =
+    "";
+
+
+  if(
+    adults ||
+    children
+  ){
+
+    travellers =
+      adults +
+      " adult" +
+      (
+        adults === 1
+          ? ""
+          : "s"
+      );
+
+    if(children){
+
+      travellers +=
+        " · " +
+        children +
+        " child" +
+        (
+          children === 1
+            ? ""
+            : "ren"
+        );
+
+    }
+
+  }else{
+
+    travellers =
+      "Flexible";
+
+  }
+
+
+  document.getElementById(
+    "summaryCountry"
+  ).textContent =
+    country;
+
+
+  document.getElementById(
+    "summaryMonth"
+  ).textContent =
+    month;
+
+
+  document.getElementById(
+    "summaryDays"
+  ).textContent =
+    String(days)
+    .match(
+      /^\d+$/
+    )
+      ? days + " days"
+      : days;
+
+
+  document.getElementById(
+    "summaryTravellers"
+  ).textContent =
+    travellers;
+
+
+  const name =
+    firstValue(
+      payload,
+      [
+        "name"
+      ],
+      ""
+    );
+
+
+  if(name){
+
+    document.getElementById(
+      "heroMessage"
+    ).textContent =
+
+      "Thank you, " +
+      name +
+      ". We've received your safari brief and our team will now shape it into a personalised Safari Plan.";
+
+  }
+
+
+  const leadId =
+    firstValue(
+      result,
+      [
+        "leadId",
+        "Lead_ID",
+        "referenceId"
+      ],
+      "SAFARI"
+    );
+
+
+  document.getElementById(
+    "leadId"
+  ).textContent =
+    leadId;
+
+}
+
+
+/* =========================================================
+   RENDER TAGS
+   ========================================================= */
+
+function renderTags(
+  payload
+){
+
+  const destinations =
+    arrayValue(
+      firstValue(
+        payload,
+        [
+          "selectedDestinations",
+          "destinations"
+        ],
+        []
+      )
+    );
+
+
+  const experiences =
+    arrayValue(
+      firstValue(
+        payload,
+        [
+          "selectedExperiences",
+          "selectedExperienceNames",
+          "experiences"
+        ],
+        []
+      )
+    );
+
+
+  const destinationBox =
+    document.getElementById(
+      "destinationTags"
+    );
+
+
+  const experienceBox =
+    document.getElementById(
+      "experienceTags"
+    );
+
+
+  if(
+    destinations.length
+  ){
+
+    destinationBox.innerHTML =
+      destinations
+        .map(
+          function(item){
+
+            return `
+              <span class="tag">
+                ${safe(item)}
+              </span>
+            `;
+
+          }
+        )
+        .join("");
+
+  }else{
+
+    destinationBox.innerHTML =
+      `
+      <span class="tag">
+        Flexible route
+      </span>
+      `;
+
+  }
+
+
+  if(
+    experiences.length
+  ){
+
+    experienceBox.innerHTML =
+      experiences
+        .map(
+          function(item){
+
+            return `
+              <span class="tag">
+                ${safe(item)}
+              </span>
+            `;
+
+          }
+        )
+        .join("");
+
+  }else{
+
+    experienceBox.innerHTML =
+      `
+      <span class="tag">
+        Open to recommendations
+      </span>
+      `;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER RECOMMENDATION
+   ========================================================= */
+
+function renderRecommendation(
+  result
+){
+
+  const recommendation =
+    result.recommendation ||
+    result.plan ||
+    {};
+
+
+  /*
+    The backend may return
+    different fields depending on
+    the recommendation engine.
+
+    We deliberately check several
+    compatible field names.
+  */
+
+  const title =
+    firstValue(
+      recommendation,
+      [
+        "title",
+        "recommendationTitle",
+        "headline",
+        "planTitle"
+      ],
+      "Your African journey awaits."
+    );
+
+
+  const narrative =
+    firstValue(
+      recommendation,
+      [
+        "narrative",
+        "recommendationText",
+        "text",
+        "description",
+        "planDescription"
+      ],
+      "Your travel preferences have been received. Our team will refine your route around your selected destinations, travel month, duration and experiences."
+    );
+
+
+  document.getElementById(
+    "planTitle"
+  ).textContent =
+    title;
+
+
+  document.getElementById(
+    "planNarrative"
+  ).textContent =
+    narrative;
+
+
+  const highlights =
+    firstValue(
+      recommendation,
+      [
+        "highlights",
+        "keyPoints",
+        "bulletPoints"
+      ],
+      []
+    );
+
+
+  const list =
+    document.getElementById(
+      "planHighlights"
+    );
+
+
+  let items =
+    arrayValue(
+      highlights
+    );
+
+
+  /*
+    Some planner responses may contain
+    a suggested route instead.
+  */
+
+  if(
+    !items.length
+  ){
+
+    const route =
+      firstValue(
+        recommendation,
+        [
+          "suggestedRoute",
+          "route"
+        ],
+        ""
+      );
+
+
+    if(route){
+
+      items.push(
+        "Suggested route: " +
+        route
+      );
+
+    }
+
+  }
+
+
+  if(
+    !items.length
+  ){
+
+    items = [
+
+      "Your selected destinations will guide the route.",
+
+      "Your selected experiences will shape the safari.",
+
+      "Your travel month will help us refine the seasonal experience.",
+
+      "Our team will refine the journey around availability and your preferences."
+
+    ];
+
+  }
+
+
+  list.innerHTML =
+    items
+      .slice(
+        0,
+        8
+      )
+      .map(
+        function(item){
+
+          return `
+            <li>
+              ${safe(item)}
+            </li>
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   INITIALISE
+   ========================================================= */
+
+function initSuccessPage(){
+
+  document.getElementById(
+    "footerYear"
+  ).textContent =
+    new Date()
+      .getFullYear();
+
+
+  const stored =
+    getStoredData();
+
+
+  const result =
+    stored.result;
+
+
+  const payload =
+    stored.payload;
+
+
+  renderSummary(
+    result,
+    payload
+  );
+
+
+  renderTags(
+    payload
+  );
+
+
+  renderRecommendation(
+    result
+  );
+
+}
+
+
+/* =========================================================
+   RUN
+   ========================================================= */
+
+initSuccessPage();
+
+</script>
+
+
+</body>
+</html>
